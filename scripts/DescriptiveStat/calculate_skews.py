@@ -1,6 +1,6 @@
 import pandas as pd
 
-PATH_TO_BLATTODEA = '/home/gabs/Documents/lab/TermitesAndCockroaches/MutSpec-Redone/interim/DescriptiveStat/codontable_midori_blattodea.csv'
+PATH_TO_BLATTODEA = '/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/codontable_midori_blattodea.csv'
 
 def get_skew_df(codon_table):
     codon_table = pd.read_csv(codon_table)
@@ -10,8 +10,9 @@ def get_skew_df(codon_table):
                                     "Workers"] = 'Sub'
     ###
 
-    GAskew = (codon_table['nG'] - codon_table['nA'])/(codon_table['nG'] + codon_table['nA'])
-    TCskew = (codon_table['nT'] - codon_table['nC'])/(codon_table['nT'] + codon_table['nC'])
+    #!!! NUCL VALUES ARE INVERTED FOR NOW
+    GAskew = (codon_table['nC'] - codon_table['nT'])/(codon_table['nC'] + codon_table['nT'])
+    TCskew = (codon_table['nA'] - codon_table['nG'])/(codon_table['nA'] + codon_table['nG'])
     Stg_Sac = (codon_table['neutralT'] + codon_table['neutralG']) - (codon_table['neutralA'] + codon_table['neutralC'])
     IDs = codon_table['Species_name']
     genes = codon_table['Gene_name']
@@ -34,7 +35,7 @@ blattodea_skew['Organism'] = blattodea_skew['Organism'].map({1.0 : 'Termites w/ 
 blattodea_skew['Organism'].fillna('Cockroaches', inplace=True)
 
 
-blattodea_skew.to_csv("/home/gabs/Documents/lab/TermitesAndCockroaches/MutSpec-Redone/interim/DescriptiveStat/midori_blattodea_skew.csv", na_rep='NA')
+blattodea_skew.to_csv("/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/midori_blattodea_skew.csv", na_rep='NA')
 
 
 #cock_skew.to_csv("../../interim/DescriptiveStat/cock_skew.csv", na_rep='NA')
