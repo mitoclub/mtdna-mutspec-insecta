@@ -1,7 +1,7 @@
 library(ggplot2)
 library(ggpubr)
 
-cock_term_skew <- read.csv("/home/gabs/Documents/lab/TermitesAndCockroaches/MutSpec-Redone/interim/DescriptiveStat/midori_blattodea_skew.csv")
+cock_term_skew <- read.csv("/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/midori_blattodea_skew.csv")
 genes <- c( "CO1", "CO2", "A8", "A6",  "CO3", "ND3", "ND4L", "ND4", "ND5", "Cytb")
 cock_term_skew$Gene_name <- factor(cock_term_skew$Gene_name, levels = genes)
 
