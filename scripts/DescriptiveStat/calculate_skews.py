@@ -11,8 +11,8 @@ def get_skew_df(codon_table):
     ###
 
     #!!! NUCL VALUES ARE INVERTED FOR NOW
-    GAskew = (codon_table['nC'] - codon_table['nT'])/(codon_table['nC'] + codon_table['nT'])
-    TCskew = (codon_table['nA'] - codon_table['nG'])/(codon_table['nA'] + codon_table['nG'])
+    GAskew = (codon_table['nG'] - codon_table['nA'])/(codon_table['nG'] + codon_table['nA'])
+    TCskew = (codon_table['nT'] - codon_table['nC'])/(codon_table['nT'] + codon_table['nC'])
     Stg_Sac = (codon_table['neutralT'] + codon_table['neutralG']) - (codon_table['neutralA'] + codon_table['neutralC'])
     IDs = codon_table['Species_name']
     genes = codon_table['Gene_name']
