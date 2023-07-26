@@ -5,7 +5,7 @@ import numpy as np
 import re
 
 PATH_TO_META = '/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/NemuPipeline/AllInsects/midori_all_insects_mutspec/msMetaData.tsv'
-PATH_TO_METAWINGS = '/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/NemuPipeline/AllInsects/midori_all_insects_mutspec/meta_wings.tsv'
+PATH_TO_METAWINGS = '/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/NemuPipeline/AllInsects/midori_all_insects_mutspec/meta_wiki_wings.tsv'
 
 meta_df = pd.read_csv(PATH_TO_META, sep='\t')
 meta_df['Wings'] = np.nan
