@@ -4,7 +4,12 @@ library(geiger)
 library(nlme)
 library(plyr)
 library(dplyr)
+library(ggplot2)
 library(stringr)
+library('corrr')
+library(ggcorrplot)
+library("FactoMineR")
+library(factoextra)
 
 nwk_path <- "/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/MIDORI/all_insects_co1seqs_sp_names.aln.treefile"
 tree <- read.tree(file=nwk_path)
@@ -73,7 +78,7 @@ morph_data <- ddply(cocks_terms,"Species_name",numcolwise(mean))
 codon_table <- ddply(codon_table,"Species_name",numcolwise(mean))
 
 #merging nucleotide freqs and skews
-codon_table <- subset(codon_table, select = c('X.A', 'X.T', 'X.G', 'X.C'))
+codon_table <- subset(codon_table, select = c('Species_name','X.A', 'X.T', 'X.G', 'X.C'))
 morph_tree <- ecomorph_tree
 rownames(morph_data) <- morph_data$Species_name
 morph_data$Species_name <- NULL
@@ -103,6 +108,16 @@ ECO<-to.matrix(eco,unique(morph_data$Cockroaches))
 tiplabels(pie=ECO[morph_tree$tip.label,],cex=0.5)
 legend(x="topright",legend=c('Termites', 'Cockroaches'),cex=0.8,pch=21,
        pt.bg=rainbow(n=length(unique(morph_data$Cockroaches))),pt.cex=1.5, text.width = 0.09)
+
+#simplePCA (non phylo)
+corr_matrix <- cor(pca_data)
+ggcorrplot(corr_matrix)
+data.pca <- princomp(corr_matrix)
+summary(data.pca)
+fviz_eig(data.pca, addlabels = TRUE)
+data.pca$loadings[, 1:2]
+fviz_pca_var(data.pca, col.var = "black")
+
 
 # mutspecPCA, sucks butt
 pca_mutspec <- t[,-c(2,4:14,16:18,20)]
