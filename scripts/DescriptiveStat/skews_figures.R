@@ -1,51 +1,53 @@
 library(ggplot2)
 library(ggpubr)
+library(glue)
 
-cock_term_skew <- read.csv("/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/midori_blattodea_skew.csv")
+FAMILY <- 'Diptera'
+  
+derrived_skew <- read.csv(glue("/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/midori_{FAMILY}_skew.csv"))
 genes <- c( "CO1", "CO2", "A8", "A6",  "CO3", "ND3", "ND4L", "ND4", "ND5", "Cytb")
-cock_term_skew$Gene_name <- factor(cock_term_skew$Gene_name, levels = genes)
+derrived_skew$Gene_name <- factor(derrived_skew$Gene_name, levels = genes)
 
-#74B72E - cock color, #466D1D -term color (didn't use)
 
 # Inverting skew data for these genes, because they are located on a different strand! NOT SUITABLE FOR MIDORI!!!
-#cock_term_skew <- transform(cock_term_skew, TCskew= ifelse(Gene_name == 'ND4L', GAskew, TCskew), GAskew = ifelse(Gene_name == 'ND4L', TCskew, GAskew))
-#cock_term_skew <- transform(cock_term_skew, TCskew= ifelse(Gene_name == 'ND4', GAskew, TCskew), GAskew = ifelse(Gene_name == 'ND4', TCskew, GAskew))
-#cock_term_skew <- transform(cock_term_skew, TCskew= ifelse(Gene_name == 'ND5', GAskew, TCskew), GAskew = ifelse(Gene_name == 'ND5', TCskew, GAskew))
+#derrived_skew <- transform(derrived_skew, TCskew= ifelse(Gene_name == 'ND4L', GAskew, TCskew), GAskew = ifelse(Gene_name == 'ND4L', TCskew, GAskew))
+#derrived_skew <- transform(derrived_skew, TCskew= ifelse(Gene_name == 'ND4', GAskew, TCskew), GAskew = ifelse(Gene_name == 'ND4', TCskew, GAskew))
+#derrived_skew <- transform(derrived_skew, TCskew= ifelse(Gene_name == 'ND5', GAskew, TCskew), GAskew = ifelse(Gene_name == 'ND5', TCskew, GAskew))
 
-#cock_term_skew[cock_term_skew$Gene_name == "ND4L", c("GAskew", "TCskew")] <- cock_term_skew[cock_term_skew$Gene_name == "ND4L", c("TCskew", "GAskew")]
+#derrived_skew[derrived_skew$Gene_name == "ND4L", c("GAskew", "TCskew")] <- derrived_skew[derrived_skew$Gene_name == "ND4L", c("TCskew", "GAskew")]
 
 ######GA#########
-cock_termGAskew <- ggplot(data=subset(cock_term_skew, !is.na(cock_term_skew$Gene_name)), aes(x=Gene_name, y=GAskew, fill=Organism)) + ylab('(G-A)/(G+A)') +
+derrivedGAskew <- ggplot(data=subset(derrived_skew, !is.na(derrived_skew$Gene_name)), aes(x=Gene_name, y=GAskew, fill=Organism)) + ylab('(G-A)/(G+A)') +
   geom_boxplot() + theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
                                      panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
 
-cock_termGAskew
+derrivedGAskew
 
 
 #######TC#######
-cock_termTCskew <- ggplot(data=subset(cock_term_skew, !is.na(cock_term_skew$Gene_name)), aes(x=Gene_name, y=TCskew, fill=Organism)) + ylab('(T-C)/(T+C)') +
+derrivedTCskew <- ggplot(data=subset(derrived_skew, !is.na(derrived_skew$Gene_name)), aes(x=Gene_name, y=TCskew, fill=Organism)) + ylab('(T-C)/(T+C)') +
   geom_boxplot() + theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
                                       panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
 
-cock_termTCskew
+derrivedTCskew
 
-ggarrange(cock_termGAskew + ylim(-0.9, 0.7), cock_termTCskew + ylim(-0.9, 0.7),
+ggarrange(derrivedGAskew + ylim(-0.9, 0.7), derrivedTCskew + ylim(-0.9, 0.7),
           common.legend = TRUE,
           labels = c("A", "B"),
           ncol = 2, nrow = 1)
 
 #######Stg-Sac######
-#cock_term_StgSac_skew <- ggplot(data=subset(cock_term_skew, !is.na(cock_term_skew$Gene_name)), aes(x=Gene_name, y=Stg.Sac, fill=Organism)) + 
+#cock_term_StgSac_skew <- ggplot(data=subset(derrived_skew, !is.na(derrived_skew$Gene_name)), aes(x=Gene_name, y=Stg.Sac, fill=Organism)) + 
 #  geom_boxplot() + theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
 #                                      panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
 
 #cock_term_StgSac_skew
 
 #######STATISTICS######
-cocks <- subset(subset(cock_term_skew, !is.na(cock_term_skew$Gene_name)), Organism == 'Cockroaches')
-lower <- subset(subset(cock_term_skew, !is.na(cock_term_skew$Gene_name)), Organism == 'Termites w/o workers')
-higher <- subset(subset(cock_term_skew, !is.na(cock_term_skew$Gene_name)), Organism == 'Termites w/ workers')
-subsocial <- subset(subset(cock_term_skew, !is.na(cock_term_skew$Gene_name)), Organism == 'Sub-social Cryptocercus')
+cocks <- subset(subset(derrived_skew, !is.na(derrived_skew$Gene_name)), Organism == 'Cockroaches')
+lower <- subset(subset(derrived_skew, !is.na(derrived_skew$Gene_name)), Organism == 'Termites w/o workers')
+higher <- subset(subset(derrived_skew, !is.na(derrived_skew$Gene_name)), Organism == 'Termites w/ workers')
+subsocial <- subset(subset(derrived_skew, !is.na(derrived_skew$Gene_name)), Organism == 'Sub-social Cryptocercus')
 
 #TTEST
 for (gene in genes)
@@ -110,8 +112,8 @@ cocksVShigher
 compare_pairs = list(c('Cockroaches', 'Termites w/ workers'),c('Cockroaches', 'Termites w/o workers'),
                      c('Termites w/o workers', 'Termites w/ workers'), c('Cockroaches', 'Sub-social Cryptocercus'))
 
-cock_termGAskew + stat_compare_means(method = 'anova')
-cock_termGAskew + compare_means(GAskew ~ Organism, data = subset(cock_term_skew, Gene_name == 'CO1'))
+derrivedGAskew + stat_compare_means(method = 'anova')
+derrivedGAskew + compare_means(GAskew ~ Organism, data = subset(derrived_skew, Gene_name == 'CO1'))
 
 ####
 

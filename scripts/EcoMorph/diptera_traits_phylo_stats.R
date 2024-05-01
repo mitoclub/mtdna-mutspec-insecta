@@ -6,27 +6,44 @@ library(plyr)
 library(dplyr)
 library(stringr)
 
-nwk_path <- "/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/MIDORI/all_insects_co1seqs(sp_names).aln.treefile"
+nwk_path <- "/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/MIDORI/all_insects_co1seqs_sp_names.aln.treefile"
 tree <- read.tree(file=nwk_path)
 
 #edit species col to fit our data
 diptera_traits <- read.csv(file="/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/EcoMorphDBs/DipteraTrait_label_encoded.csv", header = TRUE)
 diptera_traits <- diptera_traits %>% mutate(species = str_replace(species, " ", "_"))
-
+diptera_skew <- read.csv(file="/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/midori_Diptera_skew_onehot_encoded.csv", header = TRUE)
+diptera_skew <- diptera_skew %>% mutate(Species_name = str_replace(Species_name, "_[0-9]*$", ""))
+codon_table <- read.csv(file='/mnt/data/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/codontable_midori_Diptera.csv')
+codon_table <- codon_table %>% mutate(Species_name = str_replace(Species_name, "_[0-9]*$", ""))
+diptera_traits <- diptera_traits[order(diptera_traits$species), ]
+diptera_skew <- diptera_skew[order(diptera_skew$Species_name), ]
+codon_table <- codon_table[order(codon_table$Species_name), ]
 #pruning tree and db
 chk <- name.check(tree, diptera_traits$species, data.names = diptera_traits$species)
 summary(chk)
 
 ecomorph_tree <- drop.tip(tree, chk$tree_not_data)
 diptera_traits <- diptera_traits[(diptera_traits$species %in% ecomorph_tree$tip.label),]
-name.check(ecomorph_tree, diptera_traits$species, data.names = diptera_traits$species)
+diptera_skew <- diptera_skew[(diptera_skew$Species_name %in% diptera_traits$species),]
+codon_table <- codon_table[(codon_table$Species_name %in% diptera_traits$species),]
+diptera_traits <- diptera_traits[(diptera_traits$species %in% diptera_skew$Species_name),]
+chk <- name.check(ecomorph_tree, diptera_traits$species, data.names = diptera_traits$species)
+ecomorph_tree <- drop.tip(ecomorph_tree, chk$tree_not_data)
 length(ecomorph_tree$tip.label)
 ecomorph_tree
 
-#chosing between larvae and adult diets and removing non-morphological data
+#choosing between larvae and adult diets and removing non-morphological data
 morph_data <- diptera_traits[diptera_traits$traitName == 'adultDiet',]
 morph_data$traitName <- NULL
-
+diptera_skew <- diptera_skew[diptera_skew$Gene_name %in% c('CO1'), ]
+codon_table <- codon_table[codon_table$Gene_name %in% c('CO1'), ]
+#merging diptera traits with skews
+colnames(codon_table)[1] <- "species"
+colnames(diptera_skew)[1] <- "species"
+df_list <- list(diptera_skew, morph_data)
+morph_data <- Reduce(function(x, y) merge(x, y, all=TRUE), df_list)
+morph_data <- subset(morph_data, select = -c(3, 5, 6, 7))
 #plus extracting genuses for PCA coloring
 morph_genuses <- sub('_.*','',morph_data$species)
 
@@ -34,7 +51,7 @@ morph_genuses <- sub('_.*','',morph_data$species)
 ####PCA####
 chk <- name.check(ecomorph_tree, morph_data$species, data.names = morph_data$species)
 
-#removing duplicate species from tree, how's it even possible?
+#removing duplicate species from tree, how's it even possible? Might be usefull, might not be
 morph_tree <- drop.tip(ecomorph_tree, 'Culicoides_obsoletus')
 morph_data <- morph_data[(morph_data$species %in% morph_tree$tip.label),]
 
@@ -53,11 +70,12 @@ phylomorphospace(morph_tree,
                  ftype="off",node.size=c(0,1),bty="n",las=1,
                  xlab="PC1",
                  ylab=expression(paste("PC2")))
-eco<-setNames(morph_genuses,rownames(morph_data))
-ECO<-to.matrix(eco,unique(morph_genuses))
+#text(scores(morph_pca)[,1], scores(morph_pca)[,2], rownames(morph_data), cex=1, adj=c(NA,1))
+eco<-setNames(diptera_skew$Brachycera,rownames(morph_data))
+ECO<-to.matrix(eco,unique(diptera_skew$Brachycera))
 tiplabels(pie=ECO[morph_tree$tip.label,],cex=0.5)
-legend(x="topright",legend=unique(morph_genuses),cex=0.8,pch=21,
-       pt.bg=rainbow(n=length(unique(morph_genuses))),pt.cex=1.5, text.width = 2)
+legend(x="topleft",legend=c('Nematocera','Brachycera'),cex=0.8,pch=21,
+       pt.bg=rainbow(n=length(unique(diptera_skew$Brachycera))),pt.cex=1.5, text.width = 2)
 
 
 ####PIC####
@@ -115,7 +133,13 @@ anova(pgls)
 ####ONEHOT_ENCODED####
 diptera_traits <- read.csv(file="/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/EcoMorphDBs/DipteraTrait_onehot_encoded.csv", header = TRUE)
 diptera_traits <- diptera_traits %>% mutate(species = str_replace(species, " ", "_"))
-
+diptera_skew <- read.csv(file="/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/midori_Diptera_skew_onehot_encoded.csv", header = TRUE)
+diptera_skew <- diptera_skew %>% mutate(Species_name = str_replace(Species_name, "_[0-9]*$", ""))
+codon_table <- read.csv(file='/mnt/data/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/codontable_midori_Diptera.csv')
+codon_table <- codon_table %>% mutate(Species_name = str_replace(Species_name, "_[0-9]*$", ""))
+diptera_traits <- diptera_traits[order(diptera_traits$species), ]
+diptera_skew <- diptera_skew[order(diptera_skew$Species_name), ]
+codon_table <- codon_table[order(codon_table$Species_name), ]
 
 #pruning tree and db
 chk <- name.check(tree, diptera_traits$species, data.names = diptera_traits$species)
@@ -123,13 +147,55 @@ summary(chk)
 
 ecomorph_tree <- drop.tip(tree, chk$tree_not_data)
 diptera_traits <- diptera_traits[(diptera_traits$species %in% ecomorph_tree$tip.label),]
-name.check(ecomorph_tree, diptera_traits$species, data.names = diptera_traits$species)
+diptera_skew <- diptera_skew[(diptera_skew$Species_name %in% diptera_traits$species),]
+codon_table <- codon_table[(codon_table$Species_name %in% diptera_traits$species),]
+diptera_traits <- diptera_traits[(diptera_traits$species %in% diptera_skew$Species_name),]
+chk <- name.check(ecomorph_tree, diptera_traits$species, data.names = diptera_traits$species)
+ecomorph_tree <- drop.tip(ecomorph_tree, chk$tree_not_data)
 length(ecomorph_tree$tip.label)
 ecomorph_tree
 
 #chosing between larvae and adult diets and removing non-morphological data
 morph_data <- diptera_traits[diptera_traits$traitName == 'adultDiet',]
 morph_data$traitName <- NULL
+diptera_skew <- diptera_skew[diptera_skew$Gene_name %in% c('CO1'), ]
+codon_table <- codon_table[codon_table$Gene_name %in% c('CO1'), ]
+#merging diptera traits with skews
+colnames(codon_table)[1] <- "species"
+colnames(diptera_skew)[1] <- "species"
+df_list <- list(diptera_skew, morph_data)
+morph_data <- Reduce(function(x, y) merge(x, y, all=TRUE), df_list)
+#removing excessive cols and cols with only zero values
+morph_data <- subset(morph_data, select = -c(3, 5, 6, 7))
+morph_data <- morph_data[, colSums(morph_data != 0) > 0]
+#PCA
+chk <- name.check(ecomorph_tree, morph_data$species, data.names = morph_data$species)
+
+#removing duplicate species from tree, how's it even possible? Might be usefull, might not be
+morph_tree <- drop.tip(ecomorph_tree, 'Culicoides_obsoletus')
+morph_data <- morph_data[(morph_data$species %in% morph_tree$tip.label),]
+
+name.check(morph_tree, morph_data$species, data.names = morph_data$species)
+rownames(morph_data) <- morph_data$species
+morph_data$species <- NULL
+morph_pca <- phyl.pca(morph_tree, morph_data)
+morph_pca
+
+par(mar=c(4.1,4.1,2.1,1.1),las=1) ## set margins
+plot(morph_pca,main="")
+
+par(cex.axis=0.8,mar=c(5.1,5.1,1.1,1.1))
+phylomorphospace(morph_tree,
+                 scores(morph_pca)[,1:2],
+                 ftype="off",node.size=c(0,1),bty="n",las=1,
+                 xlab="PC1",
+                 ylab=expression(paste("PC2")))
+#text(scores(morph_pca)[,1], scores(morph_pca)[,2], rownames(morph_data), cex=1, adj=c(NA,1))
+eco<-setNames(diptera_skew$Brachycera,rownames(morph_data))
+ECO<-to.matrix(eco,unique(diptera_skew$Brachycera))
+tiplabels(pie=ECO[morph_tree$tip.label,],cex=0.5)
+legend(x="topleft",legend=c('Nematocera','Brachycera'),cex=0.8,pch=21,
+       pt.bg=rainbow(n=length(unique(diptera_skew$Brachycera))),pt.cex=1.5, text.width = 0.5)
 
 #PGLS
 ms12_internal <- ms12_internal[(ms12_internal$species %in% morph_tree$tip.label),]

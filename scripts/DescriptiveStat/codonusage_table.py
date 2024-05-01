@@ -1,3 +1,9 @@
+'''
+
+ IMPORTANT! I have no desire in borking something that works. I didn't write this weird ass code, Yura did, ask him. It just works.
+ JUST DON'T FORGET TO CHANGE PATHS TO GB AND OUTPUT, or you will overwrite IMPORTANT data related to termite workers!
+
+'''
 from Bio import SeqIO
 import numpy as np
 import pandas as pd
@@ -11,20 +17,26 @@ translation['ATA'] = 'M'
 translation['AGA'] = '_'
 translation['AGG'] = '_'
 
-PATH_TO_GB = '/home/gabs/Documents/lab/TermitesAndCockroaches/MutSpec-Redone/interim/MIDORI/mergedAllGenesBlattodea.gb'
-#PATH_TO_GB = '../../raw/blattodea_genbank/TermiteRefSeqs.gb'
-PATH_TO_CODON_USAGE_TABLE = '/home/gabs/Documents/lab/TermitesAndCockroaches/MutSpec-Redone/interim/DescriptiveStat/codontable_midori_blattodea.csv'
-#bc = SeqIO.parse(PATH_TO_GB, 'genbank')
+#CHANGE PATH! DO NOT USE BLATTODEA PATHS!
+FAMILY = 'Hymenoptera'
+PATH_TO_GB = f'/mnt/data/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/MIDORI/mergedAllGenes{FAMILY}.gb'
+PATH_TO_CODON_USAGE_TABLE = f'/mnt/data/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/codontable_midori_{FAMILY}.csv'
+
+cl = list(CodonTable.standard_dna_table.forward_table.keys())
+item_table = ['Species_name','GenbankID', 'Taxonomy', 'Gene_name','Gene_start_end_and_trend', 'GeneID', 'Aminoacids_from_genbank',
+             'Translated_aminoacids_by_Python', 'Not_standart_codons', 'Wrong_amino_num', 'Wrong_nucl_num','wrong_amino_%','Sequence','mtDNA_length',
+             'nA','nT','nC','nG','nNA','%A','%T','%C','%G','%NA','neutralA','neutralG','neutralC','neutralT', 'Neutral_count']
+full_items = item_table + cl
+btable = pd.DataFrame(columns=full_items)
+
 item_table = ['Species_name','GenbankID', 'Taxonomy', 'Gene_name','Gene_start_end_and_trend', 'GeneID', 'Aminoacids_from_genbank',
              'Translated_aminoacids_by_Python', 'Not_standart_codons', 'Wrong_amino_num', 'Wrong_nucl_num','wrong_amino_%','Sequence','mtDNA_length',
              'nA','nT','nC','nG','nNA','%A','%T','%C','%G','%NA','wrong_amino_%','neutralA','neutralG','neutralC','neutralT', 'Neutral_count']
-cl = list(CodonTable.standard_dna_table.forward_table.keys())
+
 full_items = item_table + cl
 items_manage = {}
 for item in full_items:
     items_manage[item] = 0
-
-btable = pd.DataFrame(columns=full_items)
 
 counter = 0
 start_c = 0
@@ -42,6 +54,9 @@ neuc = 0
 
 
 for bc in SeqIO.parse(PATH_TO_GB, format='genbank'):
+    items_manage = {}
+    for item in full_items:
+        items_manage[item] = 0
     ndc = 1
     for i in bc.features:
         if i.type == 'CDS':
@@ -139,12 +154,20 @@ for bc in SeqIO.parse(PATH_TO_GB, format='genbank'):
             codons = []
             wrong_c = ''
             neuc = 0
+
             if ndc <= 13:
-                btable = btable.append(items_manage, ignore_index=True)
+                items_manage = pd.DataFrame.from_dict(items_manage, orient='index')
+                items_manage = items_manage.transpose()
+                btable = pd.concat([btable,items_manage], ignore_index=True)
                 ndc += 1
             else:
                 ndc = 1
             for k in items_manage:
                 items_manage[k] = 0
 btable.sort_values(['Species_name', 'Gene_name'], ascending=[True, True], inplace=True)
-btable.to_csv(PATH_TO_CODON_USAGE_TABLE, sep=',')
+if 'blattodea' not in PATH_TO_CODON_USAGE_TABLE.lower():
+    print('Good to go')
+    btable.to_csv(PATH_TO_CODON_USAGE_TABLE, sep=',')
+else:
+    print('Are you sure that you want to overwrite blattodea codon table?')
+

@@ -10,15 +10,18 @@ library('corrr')
 library(ggcorrplot)
 library("FactoMineR")
 library(factoextra)
+library(tidyr)
 
 nwk_path <- "/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/MIDORI/all_insects_co1seqs_sp_names.aln.treefile"
 tree <- read.tree(file=nwk_path)
 
 #edit Species_name col to fit our data
-cocks_terms <- read.csv(file="/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/midori_blattodea_skew_onehot_encoded.csv", header = TRUE)
+cocks_terms <- read.csv(file="/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/midori_Blattodea_skew_onehot_encoded.csv", header = TRUE)
 cocks_terms <- cocks_terms %>% mutate(Species_name = str_replace(Species_name, "_[0-9]*$", ""))
-codon_table <- read.csv(file='/mnt/data/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/codontable_midori_blattodea.csv')
+codon_table <- read.csv(file='/mnt/data/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/codontable_midori_Blattodea.csv')
 codon_table <- codon_table %>% mutate(Species_name = str_replace(Species_name, "_[0-9]*$", ""))
+cocks_terms <- cocks_terms[order(cocks_terms$Species_name), ]
+codon_table <- codon_table[order(codon_table$Species_name), ]
 #pruning tree and db
 chk <- name.check(tree, cocks_terms$Species_name, data.names = cocks_terms$Species_name)
 summary(chk)
@@ -49,7 +52,7 @@ pgls <- gls(GAskew~TCskew, data = morph_data, correlation = corBM)
 summary(pgls)
 pgls <- gls(GAskew~Cockroaches, data = morph_data, correlation = corBM)
 summary(pgls)
-pgls <- gls(GAskew~Termites.w..workers, data = morph_data, correlation = corBM)
+pgls <- gls(GAskew~Termites.w..workers + Cockroaches, data = morph_data, correlation = corBM)
 summary(pgls)
 
 ####TESTING####
@@ -79,6 +82,8 @@ codon_table <- ddply(codon_table,"Species_name",numcolwise(mean))
 
 #merging nucleotide freqs and skews
 codon_table <- subset(codon_table, select = c('Species_name','X.A', 'X.T', 'X.G', 'X.C'))
+#swapping codon table's nucleotides, required for Blattodea
+colnames(codon_table) <- c ('Species_name','T', 'A', 'C', 'G')
 morph_tree <- ecomorph_tree
 rownames(morph_data) <- morph_data$Species_name
 morph_data$Species_name <- NULL
@@ -94,6 +99,13 @@ pca_data$Row.names <- NULL
 morph_pca <- phyl.pca(morph_tree, pca_data)
 morph_pca
 
+#Separating organisms for visualization
+organism_types <- morph_data
+organism_types['Sub.social.Cryptocercus'][organism_types['Sub.social.Cryptocercus'] == 1] <- 2
+organism_types['Termites.w..workers'][organism_types['Termites.w..workers'] == 1] <- 3
+organism_types['Termites.w.o.workers'][organism_types['Termites.w.o.workers'] == 1] <- 4
+organism_types <- unite(organism_types, Organism, c("Cockroaches", "Sub.social.Cryptocercus", "Termites.w..workers", "Termites.w.o.workers"), remove = TRUE)
+
 par(mar=c(4.1,4.1,2.1,1.1),las=1) ## set margins
 plot(morph_pca,main="")
 
@@ -103,11 +115,15 @@ phylomorphospace(morph_tree,
                  ftype="off",node.size=c(0,1),bty="n",las=1,
                  xlab="PC1",
                  ylab=expression(paste("PC2")))
-eco<-setNames(morph_data$Cockroaches,rownames(morph_data))
-ECO<-to.matrix(eco,unique(morph_data$Cockroaches))
+#get tip labels (species, basicaly)
+#text(scores(morph_pca)[,1], scores(morph_pca)[,2], rownames(morph_data), cex=1, adj=c(NA,1))
+
+eco<-setNames(organism_types$Organism,rownames(organism_types))
+ECO<-to.matrix(eco,unique(organism_types$Organism))
 tiplabels(pie=ECO[morph_tree$tip.label,],cex=0.5)
-legend(x="topright",legend=c('Termites', 'Cockroaches'),cex=0.8,pch=21,
-       pt.bg=rainbow(n=length(unique(morph_data$Cockroaches))),pt.cex=1.5, text.width = 0.09)
+
+legend(x="topright",legend=c('Cockroaches', 'Termites w/ workers', 'Sub social Cryptocercus', 'Termites w/o workers'),cex=0.8,pch=21,
+       pt.bg=rainbow(n=length(unique(organism_types$Organism))),pt.cex=1.5, text.width = 0.09)
 
 #simplePCA (non phylo)
 corr_matrix <- cor(pca_data)
