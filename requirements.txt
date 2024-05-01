@@ -1,1 +1,1 @@
-pymutspec==0.0.4
+pymutspec==0.0.8
