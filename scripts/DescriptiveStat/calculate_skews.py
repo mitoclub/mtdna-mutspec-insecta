@@ -17,7 +17,7 @@ def get_skew_df(codon_table):
     ###Assigning organism type
     if FAMILY == 'Blattodea':
         workers = codon_table['Workers']
-    #sucj a mess :(
+    #such a mess :(
     elif FAMILY == 'Diptera':
         codon_table['Organism'] = ""
         nematocera_families = ['Anisopodidae_52748','Bibionidae_52729','Cecidomyiidae_33406','Ceratopogonidae_41819','Chaoboridae_41811','Chironomidae_7149','Culicidae_7157','Keroplatidae_58254',
@@ -46,9 +46,9 @@ def get_skew_df(codon_table):
         organism = codon_table['Organism']
 
     #!!! NUCL VALUES ARE INVERTED FOR NOW
-    GAskew = (codon_table['nG'] - codon_table['nA'])/(codon_table['nG'] + codon_table['nA'])
-    TCskew = (codon_table['nT'] - codon_table['nC'])/(codon_table['nT'] + codon_table['nC'])
-    Stg_Sac = (codon_table['neutralT'] + codon_table['neutralG']) - (codon_table['neutralA'] + codon_table['neutralC'])
+    GAskew = (codon_table['nC'] - codon_table['nT'])/(codon_table['nC'] + codon_table['nT'])
+    TCskew = (codon_table['nA'] - codon_table['nG'])/(codon_table['nA'] + codon_table['nG'])
+    #Stg_Sac = (codon_table['neutralT'] + codon_table['neutralG']) - (codon_table['neutralA'] + codon_table['neutralC'])
     IDs = codon_table['Species_name']
     genes = codon_table['Gene_name']
     
@@ -56,7 +56,7 @@ def get_skew_df(codon_table):
     skews = IDs.to_frame().merge(GAskew.rename('GAskew'), left_index=True, right_index=True)
     skews = skews.merge(genes.rename('Gene_name'), left_index=True, right_index=True)
     skews = skews.merge(TCskew.rename('TCskew'), left_index=True, right_index=True)
-    skews = skews.merge(Stg_Sac.rename('Stg-Sac'), left_index=True, right_index=True)
+    #skews = skews.merge(Stg_Sac.rename('Stg-Sac'), left_index=True, right_index=True)
     if FAMILY == 'Blattodea':
         skews = skews.merge(workers.rename('Organism'), left_index=True, right_index=True)
     else:
