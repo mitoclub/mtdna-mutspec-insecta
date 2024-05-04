@@ -7,7 +7,7 @@ import re
 FAMILY = 'Blattodea'
 PATH_TO_CODONTABLE = f'/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/codontable_midori_{FAMILY}.csv'
 codontable = pd.read_csv(PATH_TO_CODONTABLE, index_col=0)
-#reverse complementig. probably unreasonable or is it?
+#reverse complementing
 codons = ['TTT', 'TTC', 'TTA', 'TTG', 'TCT', 'TCC',
        'TCA', 'TCG', 'TAT', 'TAC', 'TGT', 'TGC', 'TGG', 'CTT', 'CTC', 'CTA',
        'CTG', 'CCT', 'CCC', 'CCA', 'CCG', 'CAT', 'CAC', 'CAA', 'CAG', 'CGT',
@@ -20,10 +20,41 @@ for cod in codons:
     revcomp = Seq(cod).reverse_complement()
     revcomp_codons[cod] = str(revcomp)
 codontable.rename(columns=revcomp_codons, inplace=True)
+
+'''
+Diffs in invertivrate mtCode
+AGA - Ser
+AGG - Ser
+ATA - Met
+TGA - Trp
+'''
 total_codons_sum = codontable['TTT'] + codontable['TTC'] + codontable['TTA'] + codontable['TTG'] + codontable['TCT'] + codontable['TCC'] + codontable['TCA'] + codontable['TCG'] + codontable['TAT'] + codontable['TAC'] + codontable['TGT'] + codontable['TGC'] + codontable['TGG'] + codontable['CTT'] + codontable['CTC'] + codontable['CTA'] + codontable['CTG'] + codontable['CCT'] + codontable['CCC'] + codontable['CCA'] + codontable['CCG'] + codontable['CAT'] + codontable['CAC'] + codontable['CAA'] + codontable['CAG'] + codontable['CGT'] + codontable['CGC'] + codontable['CGA'] + codontable['CGG'] + codontable['ATT'] + codontable['ATC'] + codontable['ATA'] + codontable['ATG'] + codontable['ACT'] + codontable['ACC'] + codontable['ACA'] + codontable['ACG'] + codontable['AAT'] + codontable['AAC'] + codontable['AAA'] + codontable['AAG'] + codontable['AGT'] + codontable['AGC'] + codontable['AGA'] + codontable['AGG'] + codontable['GTT'] + codontable['GTC'] + codontable['GTA'] + codontable['GTG'] + codontable['GCT'] + codontable['GCC'] + codontable['GCA'] + codontable['GCG'] + codontable['GAT'] + codontable['GAC'] + codontable['GAA'] + codontable['GAG'] + codontable['GGT'] + codontable['GGC'] + codontable['GGA'] + codontable['GGG'] + codontable['TAA'] + codontable['TAG'] + codontable['TGA']
+
 phe_frac = (codontable['TTT'] + codontable['TTC'])/total_codons_sum
 leu_frac = (codontable['TTA'] + codontable['TTG'])/total_codons_sum
+leu2_frac = (codontable['CTT'] + codontable['CTC'] + codontable['CTA'] + codontable['CTG'])/total_codons_sum
+ser_frac = (codontable['TCT'] + codontable['TCC'] + codontable['TCA'] + codontable['TCG'])/total_codons_sum
 pro_frac = (codontable['CCT'] + codontable['CCC'] + codontable['CCA'] + codontable['CCG'])/total_codons_sum
+
+cys_frac = (codontable['TGT'] + codontable['TGC'])/total_codons_sum
+trp_frac = (codontable['TGA'] + codontable['TGG'])/total_codons_sum
+tyr_frac = (codontable['TAT'] + codontable['TAC'])/total_codons_sum
+arg_frac = (codontable['CGT'] + codontable['CGC'] + codontable['CGA'] + codontable['CGG'])/total_codons_sum
+his_frac = (codontable['CAT'] + codontable['CAC'])/total_codons_sum
+gln_frac = (codontable['CAA'] + codontable['CAG'])/total_codons_sum
+
+gly_frac = (codontable['GGT'] + codontable['GGC'] + codontable['GGA'] + codontable['GGG'])/total_codons_sum
+ser2_frac = (codontable['AGA'] + codontable['AGG'] + codontable['AGT'] + codontable['AGC'])/total_codons_sum
+asp_frac = (codontable['GAT']+ codontable['GAC'])/total_codons_sum
+glu_frac = (codontable['GAA'] + codontable['GAG'])/total_codons_sum
+asn_frac = (codontable['AAT'] + codontable['AAC'])/total_codons_sum
+lys_frac = (codontable['AAA'] + codontable['AAG'])/total_codons_sum
+
+val_frac = (codontable['GTC'] + codontable['GTA'] + codontable['GTG'] + codontable['GTT'])/total_codons_sum
+ile_frac = (codontable['ATT'] + codontable['ATC'])/total_codons_sum
+met_frac = (codontable['ATA'] + codontable['ATG'])/total_codons_sum
+ala_frac = (codontable['GCT'] + codontable['GCC'] + codontable['GCA'] + codontable['GCG'])/total_codons_sum
+thr_frac = (codontable['ACT'] + codontable['ACC'] + codontable['ACA'] + codontable['ACG'])/total_codons_sum
 
 if FAMILY == 'Blattodea':
         workers = codontable['Workers']
@@ -59,15 +90,36 @@ elif FAMILY == 'Diptera':
 
 IDs = codontable['Species_name']
 genes = codontable['Gene_name']
-aa_fracs = IDs.to_frame().merge(phe_frac.rename('Phe_frac'), left_index=True, right_index=True)
-aa_fracs = aa_fracs.merge(leu_frac.rename('Leu_frac'), left_index=True, right_index=True)
-aa_fracs = aa_fracs.merge(pro_frac.rename('Pro_frac'), left_index=True, right_index=True)
-aa_fracs = aa_fracs.merge(genes.rename('Gene_name'), left_index=True, right_index=True)
 
 if FAMILY == 'Blattodea':
-    aa_fracs = aa_fracs.merge(workers.rename('Organism'), left_index=True, right_index=True)
+    aa_fracs = IDs.to_frame().merge(workers.rename('Organism'), left_index=True, right_index=True)
 else:
-    aa_fracs = aa_fracs.merge(organism.rename('Organism'), left_index=True, right_index=True)
+    aa_fracs = IDs.to_frame().merge(organism.rename('Organism'), left_index=True, right_index=True)
+
+aa_fracs = aa_fracs.merge(genes.rename('Gene_name'), left_index=True, right_index=True)
+aa_fracs = aa_fracs.merge(phe_frac.rename('Phe_frac'), left_index=True, right_index=True)
+aa_fracs = aa_fracs.merge(leu_frac.rename('Leu_frac'), left_index=True, right_index=True)
+aa_fracs = aa_fracs.merge(leu2_frac.rename('Leu2_frac'), left_index=True, right_index=True)
+aa_fracs = aa_fracs.merge(ser_frac.rename('Ser_frac'), left_index=True, right_index=True)
+aa_fracs = aa_fracs.merge(pro_frac.rename('Pro_frac'), left_index=True, right_index=True)
+aa_fracs = aa_fracs.merge(cys_frac.rename('Cys_frac'), left_index=True, right_index=True)
+aa_fracs = aa_fracs.merge(trp_frac.rename('Trp_frac'), left_index=True, right_index=True)
+aa_fracs = aa_fracs.merge(tyr_frac.rename('Tyr_frac'), left_index=True, right_index=True)
+aa_fracs = aa_fracs.merge(arg_frac.rename('Arg_frac'), left_index=True, right_index=True)
+aa_fracs = aa_fracs.merge(his_frac.rename('His_frac'), left_index=True, right_index=True)
+aa_fracs = aa_fracs.merge(gln_frac.rename('Gln_frac'), left_index=True, right_index=True)
+aa_fracs = aa_fracs.merge(gly_frac.rename('Gly_frac'), left_index=True, right_index=True)
+aa_fracs = aa_fracs.merge(ser2_frac.rename('Ser2_frac'), left_index=True, right_index=True)
+aa_fracs = aa_fracs.merge(asp_frac.rename('Asp_frac'), left_index=True, right_index=True)
+aa_fracs = aa_fracs.merge(glu_frac.rename('Glu_frac'), left_index=True, right_index=True)
+aa_fracs = aa_fracs.merge(asn_frac.rename('Asn_frac'), left_index=True, right_index=True)
+aa_fracs = aa_fracs.merge(lys_frac.rename('Lys_frac'), left_index=True, right_index=True)
+aa_fracs = aa_fracs.merge(val_frac.rename('Val_frac'), left_index=True, right_index=True)
+aa_fracs = aa_fracs.merge(ile_frac.rename('Ile_frac'), left_index=True, right_index=True)
+aa_fracs = aa_fracs.merge(met_frac.rename('Met_frac'), left_index=True, right_index=True)
+aa_fracs = aa_fracs.merge(ala_frac.rename('Ala_frac'), left_index=True, right_index=True)
+aa_fracs = aa_fracs.merge(thr_frac.rename('Thr_frac'), left_index=True, right_index=True)
+
 
 aa_fracs.sort_values(by=['Organism', 'Species_name'], ascending=True)
 
@@ -75,4 +127,4 @@ if FAMILY == 'Blattodea':
     aa_fracs['Organism'] = aa_fracs['Organism'].map({1.0 : 'Termites', 0.0 : 'Termites'}) 
     aa_fracs['Organism'].fillna('Cockroaches', inplace=True)
 
-aa_fracs.to_csv(f"/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/midori_{FAMILY}_aa_fracs.csv", na_rep='NA')
+aa_fracs.to_csv(f"/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/midori_{FAMILY}_aa_fracs.tsv", sep='\t', na_rep='NA', index=False)
