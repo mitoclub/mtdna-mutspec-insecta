@@ -1,5 +1,6 @@
 import pandas as pd
 from Bio import SeqIO
+import re
 
 
 NUCL_PROT_CHECK = False #true if nucl, false if prots
