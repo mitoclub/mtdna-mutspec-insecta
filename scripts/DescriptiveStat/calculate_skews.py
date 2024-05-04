@@ -3,7 +3,7 @@ import numpy as np
 import re
 
 
-FAMILY = 'Diptera'
+FAMILY = 'Blattodea'
 PATH_TO_CODONTABLE = f'/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/codontable_midori_{FAMILY}.csv'
 
 def get_skew_df(codon_table):
