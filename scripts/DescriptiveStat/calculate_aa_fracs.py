@@ -3,6 +3,8 @@ import pandas as pd
 import numpy as np
 import re
 
+# IMPORTANT! SET THIS VAL TO TRUE IF YOU WANT FRACTIONS, ELSE YOU'LL GET ABSOLUTE VALS
+FRAC=False
 
 FAMILY = 'Blattodea'
 PATH_TO_CODONTABLE = f'/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/codontable_midori_{FAMILY}.csv'
@@ -28,7 +30,10 @@ AGG - Ser
 ATA - Met
 TGA - Trp
 '''
-total_codons_sum = codontable['TTT'] + codontable['TTC'] + codontable['TTA'] + codontable['TTG'] + codontable['TCT'] + codontable['TCC'] + codontable['TCA'] + codontable['TCG'] + codontable['TAT'] + codontable['TAC'] + codontable['TGT'] + codontable['TGC'] + codontable['TGG'] + codontable['CTT'] + codontable['CTC'] + codontable['CTA'] + codontable['CTG'] + codontable['CCT'] + codontable['CCC'] + codontable['CCA'] + codontable['CCG'] + codontable['CAT'] + codontable['CAC'] + codontable['CAA'] + codontable['CAG'] + codontable['CGT'] + codontable['CGC'] + codontable['CGA'] + codontable['CGG'] + codontable['ATT'] + codontable['ATC'] + codontable['ATA'] + codontable['ATG'] + codontable['ACT'] + codontable['ACC'] + codontable['ACA'] + codontable['ACG'] + codontable['AAT'] + codontable['AAC'] + codontable['AAA'] + codontable['AAG'] + codontable['AGT'] + codontable['AGC'] + codontable['AGA'] + codontable['AGG'] + codontable['GTT'] + codontable['GTC'] + codontable['GTA'] + codontable['GTG'] + codontable['GCT'] + codontable['GCC'] + codontable['GCA'] + codontable['GCG'] + codontable['GAT'] + codontable['GAC'] + codontable['GAA'] + codontable['GAG'] + codontable['GGT'] + codontable['GGC'] + codontable['GGA'] + codontable['GGG'] + codontable['TAA'] + codontable['TAG'] + codontable['TGA']
+if FRAC == True:
+    total_codons_sum = codontable['TTT'] + codontable['TTC'] + codontable['TTA'] + codontable['TTG'] + codontable['TCT'] + codontable['TCC'] + codontable['TCA'] + codontable['TCG'] + codontable['TAT'] + codontable['TAC'] + codontable['TGT'] + codontable['TGC'] + codontable['TGG'] + codontable['CTT'] + codontable['CTC'] + codontable['CTA'] + codontable['CTG'] + codontable['CCT'] + codontable['CCC'] + codontable['CCA'] + codontable['CCG'] + codontable['CAT'] + codontable['CAC'] + codontable['CAA'] + codontable['CAG'] + codontable['CGT'] + codontable['CGC'] + codontable['CGA'] + codontable['CGG'] + codontable['ATT'] + codontable['ATC'] + codontable['ATA'] + codontable['ATG'] + codontable['ACT'] + codontable['ACC'] + codontable['ACA'] + codontable['ACG'] + codontable['AAT'] + codontable['AAC'] + codontable['AAA'] + codontable['AAG'] + codontable['AGT'] + codontable['AGC'] + codontable['AGA'] + codontable['AGG'] + codontable['GTT'] + codontable['GTC'] + codontable['GTA'] + codontable['GTG'] + codontable['GCT'] + codontable['GCC'] + codontable['GCA'] + codontable['GCG'] + codontable['GAT'] + codontable['GAC'] + codontable['GAA'] + codontable['GAG'] + codontable['GGT'] + codontable['GGC'] + codontable['GGA'] + codontable['GGG'] + codontable['TAA'] + codontable['TAG'] + codontable['TGA']
+else:
+    total_codons_sum = 1
 
 phe_frac = (codontable['TTT'] + codontable['TTC'])/total_codons_sum
 leu_frac = (codontable['TTA'] + codontable['TTG'])/total_codons_sum
