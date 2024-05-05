@@ -72,7 +72,7 @@ for bc in SeqIO.parse(PATH_TO_GB, format='genbank'):
             if i.qualifiers['gene'] == ['ND1'] or i.qualifiers['gene'] == ['ND4'] or i.qualifiers['gene'] == ['ND4L'] or i.qualifiers['gene'] == ['ND5']:
                 items_manage['Sequence'] = i.location.extract(bc).seq.reverse_complement()
             else:
-                items_manage['Sequence'] = i.location.extract(bc)
+                items_manage['Sequence'] = i.location.extract(bc).seq
             ###
             items_manage['mtDNA_length'] = len(i.location.extract(bc).seq)
             for nucl in i.location.extract(bc).seq:
