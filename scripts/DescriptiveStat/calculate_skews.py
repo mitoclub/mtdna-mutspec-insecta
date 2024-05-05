@@ -104,6 +104,7 @@ else:
 if FAMILY == 'Blattodea':
     derrived_skew['Organism'] = derrived_skew['Organism'].map({1.0 : 'Termites w/ workers', 0.0 : 'Termites w/o workers', "Sub" : 'Sub-social Cryptocercus'}) ### LAST ONE SEPARATES SUBSOCIAL SPECIES
     derrived_skew['Organism'].fillna('Cockroaches', inplace=True)
+derrived_skew = derrived_skew.fillna(0)
 derrived_skew.to_csv(f"/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/midori_{FAMILY}_skew.csv", na_rep='NA')
 
 #one hot encoding for cocks_phylo_stats.r
