@@ -4,32 +4,29 @@ import numpy as np
 import re
 
 # IMPORTANT! SET THIS VAL TO TRUE IF YOU WANT FRACTIONS, ELSE YOU'LL GET ABSOLUTE VALS
-FRAC=False
+FRAC=True
 
+# Set to true to reverse complement codons
+REV_COMP = False
 FAMILY = 'Blattodea'
 PATH_TO_CODONTABLE = f'/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/codontable_midori_{FAMILY}.csv'
 codontable = pd.read_csv(PATH_TO_CODONTABLE, index_col=0)
-#reverse complementing
-codons = ['TTT', 'TTC', 'TTA', 'TTG', 'TCT', 'TCC',
-       'TCA', 'TCG', 'TAT', 'TAC', 'TGT', 'TGC', 'TGG', 'CTT', 'CTC', 'CTA',
-       'CTG', 'CCT', 'CCC', 'CCA', 'CCG', 'CAT', 'CAC', 'CAA', 'CAG', 'CGT',
-       'CGC', 'CGA', 'CGG', 'ATT', 'ATC', 'ATA', 'ATG', 'ACT', 'ACC', 'ACA',
-       'ACG', 'AAT', 'AAC', 'AAA', 'AAG', 'AGT', 'AGC', 'AGA', 'AGG', 'GTT',
-       'GTC', 'GTA', 'GTG', 'GCT', 'GCC', 'GCA', 'GCG', 'GAT', 'GAC', 'GAA',
-       'GAG', 'GGT', 'GGC', 'GGA', 'GGG', 'TAA', 'TAG', 'TGA']
-revcomp_codons = {}
-for cod in codons:
-    revcomp = Seq(cod).reverse_complement()
-    revcomp_codons[cod] = str(revcomp)
-codontable.rename(columns=revcomp_codons, inplace=True)
 
-'''
-Diffs in invertivrate mtCode
-AGA - Ser
-AGG - Ser
-ATA - Met
-TGA - Trp
-'''
+if REV_COMP == True:
+    #reverse complementing
+    codons = ['TTT', 'TTC', 'TTA', 'TTG', 'TCT', 'TCC',
+           'TCA', 'TCG', 'TAT', 'TAC', 'TGT', 'TGC', 'TGG', 'CTT', 'CTC', 'CTA',
+           'CTG', 'CCT', 'CCC', 'CCA', 'CCG', 'CAT', 'CAC', 'CAA', 'CAG', 'CGT',
+           'CGC', 'CGA', 'CGG', 'ATT', 'ATC', 'ATA', 'ATG', 'ACT', 'ACC', 'ACA',
+           'ACG', 'AAT', 'AAC', 'AAA', 'AAG', 'AGT', 'AGC', 'AGA', 'AGG', 'GTT',
+           'GTC', 'GTA', 'GTG', 'GCT', 'GCC', 'GCA', 'GCG', 'GAT', 'GAC', 'GAA',
+           'GAG', 'GGT', 'GGC', 'GGA', 'GGG', 'TAA', 'TAG', 'TGA']
+    revcomp_codons = {}
+    for cod in codons:
+        revcomp = Seq(cod).reverse_complement()
+        revcomp_codons[cod] = str(revcomp)
+    codontable.rename(columns=revcomp_codons, inplace=True)
+
 if FRAC == True:
     total_codons_sum = codontable['TTT'] + codontable['TTC'] + codontable['TTA'] + codontable['TTG'] + codontable['TCT'] + codontable['TCC'] + codontable['TCA'] + codontable['TCG'] + codontable['TAT'] + codontable['TAC'] + codontable['TGT'] + codontable['TGC'] + codontable['TGG'] + codontable['CTT'] + codontable['CTC'] + codontable['CTA'] + codontable['CTG'] + codontable['CCT'] + codontable['CCC'] + codontable['CCA'] + codontable['CCG'] + codontable['CAT'] + codontable['CAC'] + codontable['CAA'] + codontable['CAG'] + codontable['CGT'] + codontable['CGC'] + codontable['CGA'] + codontable['CGG'] + codontable['ATT'] + codontable['ATC'] + codontable['ATA'] + codontable['ATG'] + codontable['ACT'] + codontable['ACC'] + codontable['ACA'] + codontable['ACG'] + codontable['AAT'] + codontable['AAC'] + codontable['AAA'] + codontable['AAG'] + codontable['AGT'] + codontable['AGC'] + codontable['AGA'] + codontable['AGG'] + codontable['GTT'] + codontable['GTC'] + codontable['GTA'] + codontable['GTG'] + codontable['GCT'] + codontable['GCC'] + codontable['GCA'] + codontable['GCG'] + codontable['GAT'] + codontable['GAC'] + codontable['GAA'] + codontable['GAG'] + codontable['GGT'] + codontable['GGC'] + codontable['GGA'] + codontable['GGG'] + codontable['TAA'] + codontable['TAG'] + codontable['TGA']
 else:
@@ -131,5 +128,7 @@ aa_fracs.sort_values(by=['Organism', 'Species_name'], ascending=True)
 if FAMILY == 'Blattodea':
     aa_fracs['Organism'] = aa_fracs['Organism'].map({1.0 : 'Termites', 0.0 : 'Termites'}) 
     aa_fracs['Organism'].fillna('Cockroaches', inplace=True)
-
-aa_fracs.to_csv(f"/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/midori_{FAMILY}_aa_fracs.tsv", sep='\t', na_rep='NA', index=False)
+if FRAC == True:
+    aa_fracs.to_csv(f"/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/midori_{FAMILY}_aa_fracs.tsv", sep='\t', na_rep='NA', index=False)
+else:
+    aa_fracs.to_csv(f"/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/midori_{FAMILY}_aa_abs_vals.tsv", sep='\t', na_rep='NA', index=False)
