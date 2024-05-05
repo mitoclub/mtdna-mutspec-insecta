@@ -2,7 +2,8 @@ import pandas as pd
 import numpy as np
 import re
 
-
+#Set to true to invert mutations
+INVERT = False
 FAMILY = 'Blattodea'
 PATH_TO_CODONTABLE = f'/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/codontable_midori_{FAMILY}.csv'
 
@@ -45,23 +46,54 @@ def get_skew_df(codon_table):
         codon_table = codon_table.drop(codon_table[codon_table['Organism'] == ""].index)
         organism = codon_table['Organism']
 
-    #!!! NUCL VALUES ARE INVERTED FOR NOW
-    GAskew = (codon_table['nC'] - codon_table['nT'])/(codon_table['nC'] + codon_table['nT'])
-    TCskew = (codon_table['nA'] - codon_table['nG'])/(codon_table['nA'] + codon_table['nG'])
-    #Stg_Sac = (codon_table['neutralT'] + codon_table['neutralG']) - (codon_table['neutralA'] + codon_table['neutralC'])
-    IDs = codon_table['Species_name']
-    genes = codon_table['Gene_name']
     
-            
-    skews = IDs.to_frame().merge(GAskew.rename('GAskew'), left_index=True, right_index=True)
-    skews = skews.merge(genes.rename('Gene_name'), left_index=True, right_index=True)
-    skews = skews.merge(TCskew.rename('TCskew'), left_index=True, right_index=True)
-    #skews = skews.merge(Stg_Sac.rename('Stg-Sac'), left_index=True, right_index=True)
-    if FAMILY == 'Blattodea':
-        skews = skews.merge(workers.rename('Organism'), left_index=True, right_index=True)
-    else:
-        skews = skews.merge(organism.rename('Organism'), left_index=True, right_index=True)
+    neg_genes = ['ND1', 'ND4', 'ND4L', 'ND5']
+    if INVERT == True:
+        GAskew = []
+        TCskew = []
+        for i in codon_table.index:
+            if codon_table['Gene_name'][i] not in neg_genes:
+                GAskew.append((codon_table['neutralC'][i] - codon_table['neutralT'][i])/(codon_table['neutralC'][i] + codon_table['neutralT'][i]))
+                TCskew.append((codon_table['neutralA'][i] - codon_table['neutralG'][i])/(codon_table['neutralA'][i] + codon_table['neutralG'][i]))
+            else:
+                GAskew.append((codon_table['neutralG'][i] - codon_table['neutralA'][i])/(codon_table['neutralG'][i] + codon_table['neutralA'][i]))
+                TCskew.append((codon_table['neutralT'][i] - codon_table['neutralC'][i])/(codon_table['neutralT'][i] + codon_table['neutralC'][i]))
 
+        IDs = codon_table['Species_name']
+        genes = codon_table['Gene_name']
+        
+                
+        skews = IDs.to_frame().merge(pd.Series(GAskew).rename('GAskew'), left_index=True, right_index=True)
+        skews = skews.merge(genes.rename('Gene_name'), left_index=True, right_index=True)
+        skews = skews.merge(pd.Series(TCskew).rename('TCskew'), left_index=True, right_index=True)
+        
+        if FAMILY == 'Blattodea':
+            skews = skews.merge(workers.rename('Organism'), left_index=True, right_index=True)
+        else:
+            skews = skews.merge(organism.rename('Organism'), left_index=True, right_index=True)
+    else:
+        AGskew = []
+        CTskew = []
+        for i in codon_table.index:
+            if codon_table['Gene_name'][i] not in neg_genes:
+                AGskew.append((codon_table['neutralA'][i] - codon_table['neutralG'][i])/(codon_table['neutralA'][i] + codon_table['neutralG'][i]))
+                CTskew.append((codon_table['neutralC'][i] - codon_table['neutralT'][i])/(codon_table['neutralC'][i] + codon_table['neutralT'][i]))
+            else:
+                AGskew.append((codon_table['neutralT'][i] - codon_table['neutralC'][i])/(codon_table['neutralT'][i] + codon_table['neutralC'][i]))
+                CTskew.append((codon_table['neutralG'][i] - codon_table['neutralA'][i])/(codon_table['neutralG'][i] + codon_table['neutralA'][i]))
+
+        IDs = codon_table['Species_name']
+        genes = codon_table['Gene_name']
+        
+                
+        skews = IDs.to_frame().merge(pd.Series(AGskew).rename('AGskew'), left_index=True, right_index=True)
+        skews = skews.merge(genes.rename('Gene_name'), left_index=True, right_index=True)
+        skews = skews.merge(pd.Series(CTskew).rename('CTskew'), left_index=True, right_index=True)
+        
+        if FAMILY == 'Blattodea':
+            skews = skews.merge(workers.rename('Organism'), left_index=True, right_index=True)
+        else:
+            skews = skews.merge(organism.rename('Organism'), left_index=True, right_index=True)        
     return (skews)
 
 derrived_skew = get_skew_df(PATH_TO_CODONTABLE)
@@ -72,5 +104,10 @@ else:
 if FAMILY == 'Blattodea':
     derrived_skew['Organism'] = derrived_skew['Organism'].map({1.0 : 'Termites w/ workers', 0.0 : 'Termites w/o workers', "Sub" : 'Sub-social Cryptocercus'}) ### LAST ONE SEPARATES SUBSOCIAL SPECIES
     derrived_skew['Organism'].fillna('Cockroaches', inplace=True)
-
 derrived_skew.to_csv(f"/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/midori_{FAMILY}_skew.csv", na_rep='NA')
+
+#one hot encoding for cocks_phylo_stats.r
+cock_terms_skew = derrived_skew
+cock_terms_skew = pd.concat([cock_terms_skew, pd.get_dummies(cock_terms_skew.Organism, dtype=int)], axis='columns')
+cock_terms_skew = cock_terms_skew.drop(columns=['Organism'])
+cock_terms_skew.to_csv('/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/midori_Blattodea_skew_onehot_encoded.csv', index=False)
