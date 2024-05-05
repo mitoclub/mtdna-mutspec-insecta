@@ -14,7 +14,7 @@ translation['ATA'] = 'M'
 translation['AGA'] = 'S'
 translation['AGG'] = 'S'
 
-DROP_WRONG_AMINO_GENES = True #true to remove genes with any amount of wrong amino. false to keep as is
+DROP_WRONG_AMINO_GENES = False #true to remove genes with any amount of wrong amino. false to keep as is
 FAMILY = 'Blattodea'
 PATH_TO_GB = f'/mnt/data/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/MIDORI/mergedAllGenes{FAMILY}.gb'
 PATH_TO_CODON_USAGE_TABLE = f'/mnt/data/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/codontable_midori_{FAMILY}.csv'
