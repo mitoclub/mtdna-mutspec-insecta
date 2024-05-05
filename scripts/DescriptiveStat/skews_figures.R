@@ -2,48 +2,54 @@ library(ggplot2)
 library(ggpubr)
 library(glue)
 
-FAMILY <- 'Diptera'
+#set to true to use inverted skews (don't forget to first calculate them)
+INVERT = FALSE
+
+FAMILY <- 'Blattodea'
   
 derrived_skew <- read.csv(glue("/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/midori_{FAMILY}_skew.csv"))
 genes <- c( "CO1", "CO2", "A8", "A6",  "CO3", "ND3", "ND4L", "ND4", "ND5", "Cytb")
 derrived_skew$Gene_name <- factor(derrived_skew$Gene_name, levels = genes)
 
 
-# Inverting skew data for these genes, because they are located on a different strand! NOT SUITABLE FOR MIDORI!!!
+# Inverting skew data for these genes, because they are located on a different strand! calculate_skews.py already does it
 #derrived_skew <- transform(derrived_skew, TCskew= ifelse(Gene_name == 'ND4L', GAskew, TCskew), GAskew = ifelse(Gene_name == 'ND4L', TCskew, GAskew))
 #derrived_skew <- transform(derrived_skew, TCskew= ifelse(Gene_name == 'ND4', GAskew, TCskew), GAskew = ifelse(Gene_name == 'ND4', TCskew, GAskew))
 #derrived_skew <- transform(derrived_skew, TCskew= ifelse(Gene_name == 'ND5', GAskew, TCskew), GAskew = ifelse(Gene_name == 'ND5', TCskew, GAskew))
 
 #derrived_skew[derrived_skew$Gene_name == "ND4L", c("GAskew", "TCskew")] <- derrived_skew[derrived_skew$Gene_name == "ND4L", c("TCskew", "GAskew")]
 
-######GA#########
+if(INVERT == TRUE){
 derrivedGAskew <- ggplot(data=subset(derrived_skew, !is.na(derrived_skew$Gene_name)), aes(x=Gene_name, y=GAskew, fill=Organism)) + ylab('(G-A)/(G+A)') +
   geom_boxplot() + theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
                                      panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
 
-derrivedGAskew
-
-
-#######TC#######
 derrivedTCskew <- ggplot(data=subset(derrived_skew, !is.na(derrived_skew$Gene_name)), aes(x=Gene_name, y=TCskew, fill=Organism)) + ylab('(T-C)/(T+C)') +
   geom_boxplot() + theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
                                       panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
 
-derrivedTCskew
 
-ggarrange(derrivedGAskew + ylim(-0.9, 0.7), derrivedTCskew + ylim(-0.9, 0.7),
+ggarrange(derrivedGAskew + ylim(-1.5, 1.5), derrivedTCskew + ylim(-1.5, 1.5),
           common.legend = TRUE,
           labels = c("A", "B"),
           ncol = 2, nrow = 1)
-
-#######Stg-Sac######
-#cock_term_StgSac_skew <- ggplot(data=subset(derrived_skew, !is.na(derrived_skew$Gene_name)), aes(x=Gene_name, y=Stg.Sac, fill=Organism)) + 
-#  geom_boxplot() + theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
-#                                      panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
-
-#cock_term_StgSac_skew
-
+}else{
+  derrivedAGskew <- ggplot(data=subset(derrived_skew, !is.na(derrived_skew$Gene_name)), aes(x=Gene_name, y=AGskew, fill=Organism)) + ylab('(A-G)/(A+G)') +
+    geom_boxplot() + theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                                        panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+  
+  derrivedCTskew <- ggplot(data=subset(derrived_skew, !is.na(derrived_skew$Gene_name)), aes(x=Gene_name, y=CTskew, fill=Organism)) + ylab('(C-T)/(C+T)') +
+    geom_boxplot() + theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                                        panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+  
+  
+  ggarrange(derrivedCTskew + ylim(-1.5, 1.5), derrivedAGskew + ylim(-1.5, 1.5),
+            common.legend = TRUE,
+            labels = c("A", "B"),
+            ncol = 2, nrow = 1)  
+}
 #######STATISTICS######
+#TODO: Add INVERT trigger
 cocks <- subset(subset(derrived_skew, !is.na(derrived_skew$Gene_name)), Organism == 'Cockroaches')
 lower <- subset(subset(derrived_skew, !is.na(derrived_skew$Gene_name)), Organism == 'Termites w/o workers')
 higher <- subset(subset(derrived_skew, !is.na(derrived_skew$Gene_name)), Organism == 'Termites w/ workers')
