@@ -4,8 +4,12 @@ library(glue)
 library(readr)
 
 FAMILY <- 'Blattodea'
-
+FRACS <- TRUE
+if(FRACS == TRUE){
 aa_fracs <- read_tsv(glue("/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/midori_{FAMILY}_aa_fracs.tsv"))
+}else{
+  aa_fracs <- read_tsv(glue("/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/midori_{FAMILY}_aa_abs_vals.tsv"))  
+}
 genes <- c( "CO1", "CO2", "A8", "A6",  "CO3", "ND3", "ND4L", "ND4", "ND5", "Cytb")
 aa_fracs$Gene_name <- factor(aa_fracs$Gene_name, levels = genes)
 
@@ -113,3 +117,8 @@ ggarrange(Phe_fracs, Leu_frac, Leu2_frac, Ser_frac, Pro_frac,
 #ylim(0, 0.2)
 #ylim(0, 130)
 
+####Testing####
+Val_frac <- ggplot(data=subset(aa_fracs, !is.na(aa_fracs$Gene_name)), aes(x=Organism, y=Val_frac)) + ylab('Val fraction') +
+  geom_boxplot() + theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
+                                      panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
+Val_frac
