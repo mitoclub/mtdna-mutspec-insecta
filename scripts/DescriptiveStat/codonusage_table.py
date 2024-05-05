@@ -1,24 +1,21 @@
-'''
-
- IMPORTANT! I have no desire in borking something that works. I didn't write this weird ass code, Yura did, ask him. It just works.
- JUST DON'T FORGET TO CHANGE PATHS TO GB AND OUTPUT, or you will overwrite IMPORTANT data related to termite workers!
-
-'''
 from Bio import SeqIO
 import numpy as np
 import pandas as pd
 from Bio.Data import CodonTable
+
+import warnings 
+warnings.filterwarnings('ignore') 
 
 translation = CodonTable.standard_dna_table.forward_table
 for g in CodonTable.standard_dna_table.stop_codons:
     translation[g] = '_'
 translation['TGA'] = 'W'
 translation['ATA'] = 'M'
-translation['AGA'] = '_'
-translation['AGG'] = '_'
+translation['AGA'] = 'S'
+translation['AGG'] = 'S'
 
-#CHANGE PATH! DO NOT USE BLATTODEA PATHS!
-FAMILY = 'Hymenoptera'
+DROP_WRONG_AMINO_GENES = True #true to remove genes with any amount of wrong amino. false to keep as is
+FAMILY = 'Blattodea'
 PATH_TO_GB = f'/mnt/data/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/MIDORI/mergedAllGenes{FAMILY}.gb'
 PATH_TO_CODON_USAGE_TABLE = f'/mnt/data/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/codontable_midori_{FAMILY}.csv'
 
@@ -29,31 +26,29 @@ item_table = ['Species_name','GenbankID', 'Taxonomy', 'Gene_name','Gene_start_en
 full_items = item_table + cl
 btable = pd.DataFrame(columns=full_items)
 
-item_table = ['Species_name','GenbankID', 'Taxonomy', 'Gene_name','Gene_start_end_and_trend', 'GeneID', 'Aminoacids_from_genbank',
-             'Translated_aminoacids_by_Python', 'Not_standart_codons', 'Wrong_amino_num', 'Wrong_nucl_num','wrong_amino_%','Sequence','mtDNA_length',
-             'nA','nT','nC','nG','nNA','%A','%T','%C','%G','%NA','wrong_amino_%','neutralA','neutralG','neutralC','neutralT', 'Neutral_count']
-
-full_items = item_table + cl
-items_manage = {}
-for item in full_items:
-    items_manage[item] = 0
-
-counter = 0
-start_c = 0
-proc_c = 0
-codon_list = []
-triplet = ''
-codons = []
-trnsl_amino = ''
-kl = 0
-proc_c = 0
-nucl_c = 0
-wrong_c = ''
-ndc = 1
-neuc = 0
-
-
 for bc in SeqIO.parse(PATH_TO_GB, format='genbank'):
+    item_table = ['Species_name','GenbankID', 'Taxonomy', 'Gene_name','Gene_start_end_and_trend', 'GeneID', 'Aminoacids_from_genbank',
+                 'Translated_aminoacids_by_Python', 'Not_standart_codons', 'Wrong_amino_num', 'Wrong_nucl_num','wrong_amino_%','Sequence','mtDNA_length',
+                 'nA','nT','nC','nG','nNA','%A','%T','%C','%G','%NA','wrong_amino_%','neutralA','neutralG','neutralC','neutralT', 'Neutral_count']
+
+    full_items = item_table + cl
+    items_manage = {}
+    for item in full_items:
+        items_manage[item] = 0
+
+    counter = 0
+    start_c = 0
+    proc_c = 0
+    codon_list = []
+    triplet = ''
+    codons = []
+    trnsl_amino = ''
+    kl = 0
+    proc_c = 0
+    nucl_c = 0
+    wrong_c = ''
+    ndc = 1
+    neuc = 0
     items_manage = {}
     for item in full_items:
         items_manage[item] = 0
@@ -73,7 +68,12 @@ for bc in SeqIO.parse(PATH_TO_GB, format='genbank'):
             else:
                 items_manage['GeneID'] = i.qualifiers['db_xref'][-1]
             items_manage['Aminoacids_from_genbank'] = i.qualifiers['translation'][0]
-            items_manage['Sequence'] = i.location.extract(bc).seq
+            ###!!! REVERSE COMPLEMENTING NEGATIVE GENES, REMOVE IT IF THESE GENES AREN'T ON A "MINUS STRAND"
+            if i.qualifiers['gene'] == ['ND1'] or i.qualifiers['gene'] == ['ND4'] or i.qualifiers['gene'] == ['ND4L'] or i.qualifiers['gene'] == ['ND5']:
+                items_manage['Sequence'] = i.location.extract(bc).seq.reverse_complement()
+            else:
+                items_manage['Sequence'] = i.location.extract(bc)
+            ###
             items_manage['mtDNA_length'] = len(i.location.extract(bc).seq)
             for nucl in i.location.extract(bc).seq:
                 if nucl == 'A':
@@ -91,7 +91,12 @@ for bc in SeqIO.parse(PATH_TO_GB, format='genbank'):
             items_manage['%C'] = (items_manage['nC'])/(len(i.location.extract(bc).seq))
             items_manage['%G'] = (items_manage['nG'])/(len(i.location.extract(bc).seq))
             items_manage['%NA'] = (items_manage['nNA'])/(len(i.location.extract(bc).seq))
-            a = list(i.location.extract(bc).seq)
+            ###!!! REVERSE COMPLEMENTING NEGATIVE GENES, REMOVE IT IF THESE GENES AREN'T ON A "MINUS STRAND"
+            if i.qualifiers['gene'] == ['ND1'] or i.qualifiers['gene'] == ['ND4'] or i.qualifiers['gene'] == ['ND4L'] or i.qualifiers['gene'] == ['ND5']:
+                a = list(i.location.extract(bc).seq.reverse_complement())
+            else:
+                a = i.location.extract(bc).seq
+            ###
             for j in a:
                 triplet = triplet + j
                 counter += 1
@@ -130,20 +135,16 @@ for bc in SeqIO.parse(PATH_TO_GB, format='genbank'):
                                 items_manage['neutralT'] += 1
             items_manage['Translated_aminoacids_by_Python'] = trnsl_amino
             items_manage['Neutral_count'] = neuc
-            '''
-            #blocked it, cuz it was causing some stupid problems I don't know how to solve. Just fuck it for now.
-            #TODO: 
-            Solve it
-            if nuc != items_manage['Translated_aminoacids_by_Python'][nucl_c]:
-            IndexError: string index out of range
-            '''
-            #for nuc in (items_manage['Aminoacids_from_genbank']):
-            #    if nuc != items_manage['Translated_aminoacids_by_Python'][nucl_c]:
-            #        proc_c += 1
-            #    nucl_c += 1
-            #items_manage['wrong_amino_%'] = proc_c * 100 / len(items_manage['Translated_aminoacids_by_Python'])
-            #items_manage['Wrong_amino_num'] = proc_c
-            #items_manage['Wrong_nucl_num'] = wrong_c
+            for nuc in (items_manage['Aminoacids_from_genbank']):
+                if len(items_manage['Translated_aminoacids_by_Python']) < len(items_manage['Aminoacids_from_genbank']):
+                    diff = len(items_manage['Aminoacids_from_genbank']) - len(items_manage['Translated_aminoacids_by_Python'])
+                    items_manage['Translated_aminoacids_by_Python'] = items_manage['Translated_aminoacids_by_Python'] + ('_' * diff)
+                if nuc != items_manage['Translated_aminoacids_by_Python'][nucl_c]:
+                    proc_c += 1
+                nucl_c += 1
+            items_manage['wrong_amino_%'] = proc_c * 100 / len(items_manage['Translated_aminoacids_by_Python'])
+            items_manage['Wrong_amino_num'] = proc_c
+            items_manage['Wrong_nucl_num'] = wrong_c
 
 
 
@@ -165,9 +166,33 @@ for bc in SeqIO.parse(PATH_TO_GB, format='genbank'):
             for k in items_manage:
                 items_manage[k] = 0
 btable.sort_values(['Species_name', 'Gene_name'], ascending=[True, True], inplace=True)
-if 'blattodea' not in PATH_TO_CODON_USAGE_TABLE.lower():
-    print('Good to go')
-    btable.to_csv(PATH_TO_CODON_USAGE_TABLE, sep=',')
-else:
-    print('Are you sure that you want to overwrite blattodea codon table?')
+
+if FAMILY == 'Blattodea':
+    btable.insert(3, "Workers", pd.Series(dtype='int'))
+    workers = {'Termitidae_46569': 1.0,
+    'Anaplectidae_2163898': np.nan,
+    'Blattidae_6974': np.nan,
+    'Termopsidae_7501': 0.0,
+    'Kalotermitidae_46562': 0.0,
+    'Blaberidae_6979': np.nan,
+    'Ectobiidae_1049651': np.nan,
+    'Rhinotermitidae_36985': 0.0,
+    'Cryptocercidae_36982': np.nan,
+    'Corydiidae_30007': np.nan,
+    'Mastotermitidae_37434': 1.0,
+    'Hodotermitidae_70920': 1.0,
+    'Serritermitidae_119664': 0.0}
+    for i in btable.index:
+        btable['Workers'][i] = workers[btable['Taxonomy'][i][4]]
+
+if DROP_WRONG_AMINO_GENES == True:
+    btable = btable.drop(btable[btable["Wrong_amino_num"] != 0].index)
+    btable.drop(btable[btable["Wrong_amino_num"] != 0].index)
+    gene_count = btable['Species_name'].value_counts().to_dict()
+    for sp, count in gene_count.items():
+        if count != 13:
+            btable = btable.drop(btable[btable['Species_name'] == sp].index)
+
+btable.to_csv(PATH_TO_CODON_USAGE_TABLE, sep=',')
+
 
