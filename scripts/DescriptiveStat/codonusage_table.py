@@ -2,31 +2,29 @@ from Bio import SeqIO
 import numpy as np
 import pandas as pd
 from Bio.Data import CodonTable
+from tqdm import tqdm
 
 import warnings 
 warnings.filterwarnings('ignore') 
 
-translation = CodonTable.standard_dna_table.forward_table
-for g in CodonTable.standard_dna_table.stop_codons:
+translation = CodonTable.unambiguous_dna_by_id[5].forward_table
+for g in CodonTable.unambiguous_dna_by_id[5].stop_codons:
     translation[g] = '_'
-translation['TGA'] = 'W'
-translation['ATA'] = 'M'
-translation['AGA'] = 'S'
-translation['AGG'] = 'S'
 
-DROP_WRONG_AMINO_GENES = False #true to remove genes with any amount of wrong amino. false to keep as is
-FAMILY = 'Blattodea'
-PATH_TO_GB = f'/mnt/data/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/MIDORI/mergedAllGenes{FAMILY}.gb'
-PATH_TO_CODON_USAGE_TABLE = f'/mnt/data/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/codontable_midori_{FAMILY}.csv'
+DROP_WRONG_AMINO_GENES = True #true to remove genes with any amount of wrong amino. false to keep as is
+TAXA = 'Insecta'
+PATH_TO_GB = f'/mnt/data/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/MIDORI/mergedAllGenes{TAXA}.gb'
+PATH_TO_CODON_USAGE_TABLE = f'/mnt/data/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/codontable_midori_{TAXA}.csv'
+records_num = sum(1 for rec in SeqIO.parse(PATH_TO_GB, format='genbank').records)
 
-cl = list(CodonTable.standard_dna_table.forward_table.keys())
+cl = list(CodonTable.unambiguous_dna_by_id[5].forward_table.keys())
 item_table = ['Species_name','GenbankID', 'Taxonomy', 'Gene_name','Gene_start_end_and_trend', 'GeneID', 'Aminoacids_from_genbank',
              'Translated_aminoacids_by_Python', 'Not_standart_codons', 'Wrong_amino_num', 'Wrong_nucl_num','wrong_amino_%','Sequence','mtDNA_length',
              'nA','nT','nC','nG','nNA','%A','%T','%C','%G','%NA','neutralA','neutralG','neutralC','neutralT', 'Neutral_count']
 full_items = item_table + cl
 btable = pd.DataFrame(columns=full_items)
 
-for bc in SeqIO.parse(PATH_TO_GB, format='genbank'):
+for bc in tqdm(SeqIO.parse(PATH_TO_GB, format='genbank'), total=records_num, unit='GBs', desc='Species * 13 genes calculated'):
     item_table = ['Species_name','GenbankID', 'Taxonomy', 'Gene_name','Gene_start_end_and_trend', 'GeneID', 'Aminoacids_from_genbank',
                  'Translated_aminoacids_by_Python', 'Not_standart_codons', 'Wrong_amino_num', 'Wrong_nucl_num','wrong_amino_%','Sequence','mtDNA_length',
                  'nA','nT','nC','nG','nNA','%A','%T','%C','%G','%NA','wrong_amino_%','neutralA','neutralG','neutralC','neutralT', 'Neutral_count']
@@ -167,7 +165,7 @@ for bc in SeqIO.parse(PATH_TO_GB, format='genbank'):
                 items_manage[k] = 0
 btable.sort_values(['Species_name', 'Gene_name'], ascending=[True, True], inplace=True)
 
-if FAMILY == 'Blattodea':
+if TAXA == 'Blattodea':
     btable.insert(3, "Workers", pd.Series(dtype='int'))
     workers = {'Termitidae_46569': 1.0,
     'Anaplectidae_2163898': np.nan,
