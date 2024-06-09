@@ -3,23 +3,30 @@ import numpy as np
 import re
 
 #Set to true to invert mutations
-INVERT = False
-FAMILY = 'Blattodea'
-PATH_TO_CODONTABLE = f'/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/codontable_midori_{FAMILY}.csv'
+INVERT = True
+TAXA = 'Apidae'
+#Set to True to calculate skews for CO1 genes only
+JUST_CO1 = False
+if JUST_CO1:
+    PATH_TO_CODONTABLE = f'/mnt/data/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/codontable_midori_{TAXA}_CO1.csv'
+    PATH_TO_SKEW = f"/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/midori_{TAXA}_CO1_skew.csv"
+else:
+    PATH_TO_CODONTABLE = f'/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/codontable_midori_{TAXA}.csv'
+    PATH_TO_SKEW = f"/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/midori_{TAXA}_skew.csv"
 
 def get_skew_df(codon_table):
     codon_table = pd.read_csv(codon_table)
     
     ###ADD IT TO SEPARATE SUBSOCIAL CRIPTOCERCUS
-    if FAMILY == 'Blattodea':
+    if TAXA == 'Blattodea':
         codon_table.loc[codon_table["Taxonomy"] == "['Eukaryota_2759', 'Arthropoda_6656', 'Insecta_50557', 'Blattodea_85823', 'Cryptocercidae_36982']",
                                         "Workers"] = 'Sub'
     
     ###Assigning organism type
-    if FAMILY == 'Blattodea':
+    if TAXA == 'Blattodea':
         workers = codon_table['Workers']
     #such a mess :(
-    elif FAMILY == 'Diptera':
+    elif TAXA == 'Diptera':
         codon_table['Organism'] = ""
         nematocera_families = ['Anisopodidae_52748','Bibionidae_52729','Cecidomyiidae_33406','Ceratopogonidae_41819','Chaoboridae_41811','Chironomidae_7149','Culicidae_7157','Keroplatidae_58254',
             'Limoniidae_43823','Mycetophilidae_29035','Psychodidae_7197','Ptychopteridae_79304','Sciaridae_7184','Simuliidae_7190','Tipulidae_41042']
@@ -45,7 +52,45 @@ def get_skew_df(codon_table):
         #Removing species without set organism type
         codon_table = codon_table.drop(codon_table[codon_table['Organism'] == ""].index)
         organism = codon_table['Organism']
+    elif TAXA == 'Apidae':
+        codon_table['Organism'] = ""
+        social_genuses = ['Bombus', 'Apis', 'Exoneurella', 'Ceratina', 'Melipona', 'Partamona', 'Euglossa', 'Tetragonula']
+        nonsocial_genuses = ['Xylocopa', 'Amegilla', 'Anthophora', 'Nomada', 'Eulaema', 'Eucera', 'Epeolus']
+        for genus in social_genuses:
+            for i in codon_table.index:
+                real_genus = codon_table['Species_name'][i].split('_')[0]
+                if real_genus == genus:
+                    codon_table.at[i, 'Organism'] = 'Social'
+        for genus in nonsocial_genuses:
+            for i in codon_table.index:
+                real_genus = codon_table['Species_name'][i].split('_')[0]
+                if real_genus == genus:
+                    codon_table.at[i, 'Organism'] = 'Nonsocial'
+        #Removing species without set organism type
+        codon_table = codon_table.drop(codon_table[codon_table['Organism'] == ""].index)
+        organism = codon_table['Organism']
+    elif TAXA == 'Hymenoptera':
+        codon_table['Organism'] = ""
+        long_tongue_fams = ['Apidae_7458', 'Megachilidae_124286']
 
+        for fam in long_tongue_fams:
+            for i in codon_table.index:
+                real_fam = re.sub("['\[\]]",'',codon_table['Taxonomy'][i].split(',')[4].strip())
+                if real_fam == fam:
+                    codon_table.at[i, 'Organism'] = 'Long tongued'
+
+        short_tongue_fams = ['Andrenidae_48719', 'Halictidae_77572', 'Colletidae_156309']
+        for fam in short_tongue_fams:
+            for i in codon_table.index:
+                real_fam = re.sub("['\[\]]",'',codon_table['Taxonomy'][i].split(',')[4].strip())
+                if real_fam == fam:
+                    codon_table.at[i, 'Organism'] = 'Short tongued'
+        #Removing species without set organism type
+        codon_table = codon_table.drop(codon_table[codon_table['Organism'] == ""].index)
+        organism = codon_table['Organism']
+    else:
+        codon_table['Organism'] = ""
+        organism = codon_table['Organism']
     
     neg_genes = ['ND1', 'ND4', 'ND4L', 'ND5']
     if INVERT == True:
@@ -67,7 +112,7 @@ def get_skew_df(codon_table):
         skews = skews.merge(genes.rename('Gene_name'), left_index=True, right_index=True)
         skews = skews.merge(pd.Series(TCskew).rename('TCskew'), left_index=True, right_index=True)
         
-        if FAMILY == 'Blattodea':
+        if TAXA == 'Blattodea':
             skews = skews.merge(workers.rename('Organism'), left_index=True, right_index=True)
         else:
             skews = skews.merge(organism.rename('Organism'), left_index=True, right_index=True)
@@ -90,25 +135,26 @@ def get_skew_df(codon_table):
         skews = skews.merge(genes.rename('Gene_name'), left_index=True, right_index=True)
         skews = skews.merge(pd.Series(CTskew).rename('CTskew'), left_index=True, right_index=True)
         
-        if FAMILY == 'Blattodea':
+        if TAXA == 'Blattodea':
             skews = skews.merge(workers.rename('Organism'), left_index=True, right_index=True)
         else:
             skews = skews.merge(organism.rename('Organism'), left_index=True, right_index=True)        
     return (skews)
 
 derrived_skew = get_skew_df(PATH_TO_CODONTABLE)
-if FAMILY == 'Blattodea' or FAMILY == 'Diptera':
+if TAXA == 'Blattodea' or TAXA == 'Diptera' or TAXA == 'Apidae' or TAXA == 'Hymenoptera':
     derrived_skew = derrived_skew.sort_values(by=['Organism', 'Species_name'], ascending=True)
 else:
     derrived_skew = derrived_skew.sort_values(by=['Species_name'], ascending=True)
-if FAMILY == 'Blattodea':
+if TAXA == 'Blattodea':
     derrived_skew['Organism'] = derrived_skew['Organism'].map({1.0 : 'Termites w/ workers', 0.0 : 'Termites w/o workers', "Sub" : 'Sub-social Cryptocercus'}) ### LAST ONE SEPARATES SUBSOCIAL SPECIES
     derrived_skew['Organism'].fillna('Cockroaches', inplace=True)
 derrived_skew = derrived_skew.fillna(0)
-derrived_skew.to_csv(f"/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/midori_{FAMILY}_skew.csv", na_rep='NA')
+derrived_skew.to_csv(PATH_TO_SKEW, na_rep='NA')
 
 #one hot encoding for cocks_phylo_stats.r
-cock_terms_skew = derrived_skew
-cock_terms_skew = pd.concat([cock_terms_skew, pd.get_dummies(cock_terms_skew.Organism, dtype=int)], axis='columns')
-cock_terms_skew = cock_terms_skew.drop(columns=['Organism'])
-cock_terms_skew.to_csv('/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/midori_Blattodea_skew_onehot_encoded.csv', index=False)
+if TAXA == 'Blattodea':
+    cock_terms_skew = derrived_skew
+    cock_terms_skew = pd.concat([cock_terms_skew, pd.get_dummies(cock_terms_skew.Organism, dtype=int)], axis='columns')
+    cock_terms_skew = cock_terms_skew.drop(columns=['Organism'])
+    cock_terms_skew.to_csv('/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/midori_Blattodea_skew_onehot_encoded.csv', index=False)

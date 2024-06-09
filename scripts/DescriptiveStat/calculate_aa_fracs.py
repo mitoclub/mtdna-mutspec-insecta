@@ -7,9 +7,14 @@ import re
 FRAC=True
 
 # Set to true to reverse complement codons
-REV_COMP = False
-FAMILY = 'Blattodea'
-PATH_TO_CODONTABLE = f'/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/codontable_midori_{FAMILY}.csv'
+REV_COMP = True
+TAXA = 'Orthoptera'
+#set to True to use gb with CO1 only
+JUST_CO1 = True
+if JUST_CO1 == True:
+    PATH_TO_CODONTABLE = f'/mnt/data/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/codontable_midori_{TAXA}_CO1.csv'
+else:
+    PATH_TO_CODONTABLE = f'/mnt/data/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/codontable_midori_{TAXA}.csv'
 codontable = pd.read_csv(PATH_TO_CODONTABLE, index_col=0)
 
 if REV_COMP == True:
@@ -58,10 +63,10 @@ met_frac = (codontable['ATA'] + codontable['ATG'])/total_codons_sum
 ala_frac = (codontable['GCT'] + codontable['GCC'] + codontable['GCA'] + codontable['GCG'])/total_codons_sum
 thr_frac = (codontable['ACT'] + codontable['ACC'] + codontable['ACA'] + codontable['ACG'])/total_codons_sum
 
-if FAMILY == 'Blattodea':
+if TAXA == 'Blattodea':
         workers = codontable['Workers']
     #such a mess :(
-elif FAMILY == 'Diptera':
+elif TAXA == 'Diptera':
     codontable['Organism'] = ""
     nematocera_families = ['Anisopodidae_52748','Bibionidae_52729','Cecidomyiidae_33406','Ceratopogonidae_41819','Chaoboridae_41811','Chironomidae_7149','Culicidae_7157','Keroplatidae_58254',
         'Limoniidae_43823','Mycetophilidae_29035','Psychodidae_7197','Ptychopteridae_79304','Sciaridae_7184','Simuliidae_7190','Tipulidae_41042']
@@ -89,11 +94,48 @@ elif FAMILY == 'Diptera':
     #Removing species without set organism type
     codontable = codontable.drop(codontable[codontable['Organism'] == ""].index)
     organism = codontable['Organism']
+elif TAXA == 'Apidae':
+    codontable['Organism'] = ""
+    social_genuses = ['Bombus', 'Apis', 'Exoneurella', 'Ceratina', 'Melipona', 'Partamona', 'Euglossa', 'Tetragonula']
+    nonsocial_genuses = ['Xylocopa', 'Amegilla', 'Anthophora', 'Nomada', 'Eulaema', 'Eucera', 'Epeolus']
+    for genus in social_genuses:
+        for i in codontable.index:
+            real_genus = codontable['Species_name'][i].split('_')[0]
+            if real_genus == genus:
+                codontable.at[i, 'Organism'] = 'Social'
+    for genus in nonsocial_genuses:
+        for i in codontable.index:
+            real_genus = codontable['Species_name'][i].split('_')[0]
+            if real_genus == genus:
+                codontable.at[i, 'Organism'] = 'Nonsocial'
+    #Removing species without set organism type
+    codontable = codontable.drop(codontable[codontable['Organism'] == ""].index)
+    organism = codontable['Organism']
+elif TAXA == 'Hymenoptera':
+    codontable['Organism'] = ""
+    long_tongue_fams = ['Apidae_7458', 'Megachilidae_124286']
+    for fam in long_tongue_fams:
+        for i in codontable.index:
+            real_fam = re.sub("['\[\]]",'',codontable['Taxonomy'][i].split(',')[4].strip())
+            if real_fam == fam:
+                codontable.at[i, 'Organism'] = 'Long tongued'
+    short_tongue_fams = ['Andrenidae_48719', 'Halictidae_77572', 'Colletidae_156309']
+    for fam in short_tongue_fams:
+        for i in codontable.index:
+            real_fam = re.sub("['\[\]]",'',codontable['Taxonomy'][i].split(',')[4].strip())
+            if real_fam == fam:
+                codontable.at[i, 'Organism'] = 'Short tongued'
+    #Removing species without set organism type
+    codontable = codontable.drop(codontable[codontable['Organism'] == ""].index)
+    organism = codontable['Organism']
+else:
+    codontable['Organism'] = ""
+    organism = codontable['Organism']
 
 IDs = codontable['Species_name']
 genes = codontable['Gene_name']
 
-if FAMILY == 'Blattodea':
+if TAXA == 'Blattodea':
     aa_fracs = IDs.to_frame().merge(workers.rename('Organism'), left_index=True, right_index=True)
 else:
     aa_fracs = IDs.to_frame().merge(organism.rename('Organism'), left_index=True, right_index=True)
@@ -125,10 +167,14 @@ aa_fracs = aa_fracs.merge(thr_frac.rename('Thr_frac'), left_index=True, right_in
 
 aa_fracs.sort_values(by=['Organism', 'Species_name'], ascending=True)
 
-if FAMILY == 'Blattodea':
+if TAXA == 'Blattodea':
     aa_fracs['Organism'] = aa_fracs['Organism'].map({1.0 : 'Termites', 0.0 : 'Termites'}) 
     aa_fracs['Organism'].fillna('Cockroaches', inplace=True)
+
 if FRAC == True:
-    aa_fracs.to_csv(f"/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/midori_{FAMILY}_aa_fracs.tsv", sep='\t', na_rep='NA', index=False)
+    if JUST_CO1 == True:
+        aa_fracs.to_csv(f"/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/midori_{TAXA}_CO1_aa_fracs.tsv", sep='\t', na_rep='NA', index=False)
+    else:
+        aa_fracs.to_csv(f"/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/midori_{TAXA}_aa_fracs.tsv", sep='\t', na_rep='NA', index=False)
 else:
-    aa_fracs.to_csv(f"/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/midori_{FAMILY}_aa_abs_vals.tsv", sep='\t', na_rep='NA', index=False)
+    aa_fracs.to_csv(f"/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/midori_{TAXA}_aa_abs_vals.tsv", sep='\t', na_rep='NA', index=False)

@@ -15,7 +15,7 @@ library(tidyr)
 library(readr)
 
 #set to true to use inverted skews and nucls (first calculate this all)
-INVERT = FALSE
+INVERT = TRUE
 nwk_path <- "/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/MIDORI/all_insects_co1seqs_sp_names.aln.treefile"
 tree <- read.tree(file=nwk_path)
 
@@ -39,7 +39,7 @@ ms12_internal$Species_name <- NULL
 
 corr_matrix <- cor(ms12_internal)
 ggcorrplot(corr_matrix)
-data_pca <- prcomp(ms12_internal, scale. =TRUE)
+data_pca <- prcomp(ms12_internal) #.scale = TRUE is prolly unneeded, cuz mutspec is kinda scaled already
 summary(data_pca)
 fviz_eig(data_pca, addlabels = TRUE)
 #data.pca$loadings[, 1:2]
@@ -78,14 +78,14 @@ if (INVERT == TRUE){
 pgls <- gls(GAskew~TCskew, data = morph_data, correlation = corBM)
 summary(pgls)
 pgls <- gls(GAskew~Cockroaches, data = morph_data, correlation = corBM)
-summary(pgls)
+summary(pgls) # 1 is Cock, 2 is Term
 pgls <- gls(GAskew~Termites.w..workers + Cockroaches, data = morph_data, correlation = corBM)
 summary(pgls)
 }else{
   pgls <- gls(CTskew~AGskew, data = morph_data, correlation = corBM)
   summary(pgls)
   pgls <- gls(CTskew~Cockroaches, data = morph_data, correlation = corBM)
-  summary(pgls)
+  summary(pgls) # 1 is Cock, 2 is Term
   pgls <- gls(CTskew~Termites.w..workers + Cockroaches, data = morph_data, correlation = corBM)
   summary(pgls)
 }
@@ -103,9 +103,9 @@ t <- cbind(morph_data, ms12_internal[, -which(names(ms12_internal) %in% c("Speci
 spp<-rownames(morph_data)
 corBM<-corBrownian(phy = morph_tree, form = ~spp)
 if(INVERT == TRUE){
-pgls <- gls(G.A~Cockroaches, data = t, correlation = corBM)
+pgls <- gls(A.G~Cockroaches, data = t, correlation = corBM)
 summary(pgls)
-pgls <- gls(G.A~Termites.w..workers, data = t, correlation = corBM)
+pgls <- gls(A.G~Termites.w..workers, data = t, correlation = corBM)
 summary(pgls)
 }else{
   pgls <- gls(T.C~Cockroaches, data = t, correlation = corBM)
@@ -170,7 +170,8 @@ ECO<-to.matrix(eco,unique(organism_types$Organism))
 tiplabels(pie=ECO[morph_tree$tip.label,],cex=0.5)
 #ALWAYS CHECK IF LEGEN CORRESPONDS WITH POINTS, DAMNIT!
 legend(x="topright",legend=c('Cockroaches', 'Termites w/ workers', 'Termites w/o workers', 'Sub social Cryptocercus'),cex=0.8,pch=21,
-       pt.bg=rainbow(n=length(unique(organism_types$Organism))),pt.cex=1.5, text.width = 0.09)
+       pt.bg=rainbow(n=length(unique(organism_types$Organism))),pt.cex=1.5, text.width = 0.3)
+
 
 #simplePCA (non phylo)
 corr_matrix <- cor(pca_data)
@@ -183,7 +184,7 @@ fviz_pca_var(data.pca, col.var = "black")
 
 
 # mutspecPCA, sucks butt. MAYBE NOT ANYMORE :)
-pca_mutspec <- t[,-c(2,4:14,16:18,20)]
+pca_mutspec <- t[,c(1, 3, 9, 13)]
 morph_pca <- phyl.pca(morph_tree, pca_mutspec)
 morph_pca
 
@@ -197,9 +198,9 @@ phylomorphospace(morph_tree,
                  xlab="PC1",
                  ylab=expression(paste("PC2")))
 #get tip labels (species, basically)
-text(scores(morph_pca)[,1], scores(morph_pca)[,2], rownames(morph_data), cex=1, adj=c(NA,1))
+#text(scores(morph_pca)[,1], scores(morph_pca)[,2], rownames(morph_data), cex=1, adj=c(NA,1))
 eco<-setNames(t$Cockroaches,rownames(t))
 ECO<-to.matrix(eco,unique(t$Cockroaches))
 tiplabels(pie=ECO[morph_tree$tip.label,],cex=0.5)
 legend(x="topright",legend=c('Cockroaches', 'Termites'),cex=0.8,pch=21,
-       pt.bg=rainbow(n=length(unique(t$Cockroaches))),pt.cex=1.5, text.width = 0.1)
+       pt.bg=rainbow(n=length(unique(t$Cockroaches))),pt.cex=1.5, text.width = 0.2)

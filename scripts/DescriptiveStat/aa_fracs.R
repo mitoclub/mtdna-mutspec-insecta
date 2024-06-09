@@ -10,7 +10,7 @@ aa_fracs <- read_tsv(glue("/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna
 }else{
   aa_fracs <- read_tsv(glue("/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/midori_{FAMILY}_aa_abs_vals.tsv"))  
 }
-genes <- c( "CO1", "CO2", "A8", "A6",  "CO3", "ND3", "ND4L", "ND4", "ND5", "Cytb")
+genes <- c("ND2", "CO1", "CO2", "A8", "A6",  "CO3", "ND3", "ND5", "ND4", "ND4L", "ND6", "Cytb", "ND1")
 aa_fracs$Gene_name <- factor(aa_fracs$Gene_name, levels = genes)
 
 Phe_fracs <- ggplot(data=subset(aa_fracs, !is.na(aa_fracs$Gene_name)), aes(x=Gene_name, y=Phe_frac, fill=Organism)) + ylab('Phe fraction') +
@@ -107,11 +107,6 @@ ggarrange(Phe_fracs, Leu_frac, Leu2_frac, Ser_frac, Pro_frac,
           Asn_frac, Lys_frac, Val_frac, Ile_frac, Met_frac,
           Ala_frac, Thr_frac,
           common.legend = TRUE,
-          labels = c('L', 'L', 'L', 'L','G',
-                     'L', 'L', 'L', 'L', 'G',
-                     'G', 'L', 'L', 'L', 'L', 
-                     'G', 'G', 'L', 'L', 'L',
-                     'L', 'G'),
           ncol = 5, nrow = 5)
 
 #ylim(0, 0.2)
@@ -122,3 +117,4 @@ Val_frac <- ggplot(data=subset(aa_fracs, !is.na(aa_fracs$Gene_name)), aes(x=Orga
   geom_boxplot() + theme_bw() + theme(panel.border = element_blank(), panel.grid.major = element_blank(),
                                       panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
 Val_frac
+

@@ -3,19 +3,19 @@ library(ggpubr)
 library(glue)
 
 #set to true to use inverted skews (don't forget to first calculate them)
-INVERT = FALSE
+INVERT = TRUE
+#set to true to use only CO1 skews (calculate them first)
+JUST_CO1 = FALSE
 
-FAMILY <- 'Blattodea'
-  
-derrived_skew <- read.csv(glue("/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/midori_{FAMILY}_skew.csv"))
-genes <- c( "CO1", "CO2", "A8", "A6",  "CO3", "ND3", "ND4L", "ND4", "ND5", "Cytb")
+TAXA <- 'Apidae'
+
+if (JUST_CO1 == TRUE){
+derrived_skew <- read.csv(glue("/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/midori_{TAXA}_CO1_skew.csv"))
+}else{
+derrived_skew <- read.csv(glue("/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/midori_{TAXA}_skew.csv"))
+} 
+genes <- c("ND2", "CO1", "CO2", "A8", "A6",  "CO3", "ND3", "ND5", "ND4", "ND4L", "ND6", "Cytb", "ND1")
 derrived_skew$Gene_name <- factor(derrived_skew$Gene_name, levels = genes)
-
-
-# Inverting skew data for these genes, because they are located on a different strand! calculate_skews.py already does it
-#derrived_skew <- transform(derrived_skew, TCskew= ifelse(Gene_name == 'ND4L', GAskew, TCskew), GAskew = ifelse(Gene_name == 'ND4L', TCskew, GAskew))
-#derrived_skew <- transform(derrived_skew, TCskew= ifelse(Gene_name == 'ND4', GAskew, TCskew), GAskew = ifelse(Gene_name == 'ND4', TCskew, GAskew))
-#derrived_skew <- transform(derrived_skew, TCskew= ifelse(Gene_name == 'ND5', GAskew, TCskew), GAskew = ifelse(Gene_name == 'ND5', TCskew, GAskew))
 
 #derrived_skew[derrived_skew$Gene_name == "ND4L", c("GAskew", "TCskew")] <- derrived_skew[derrived_skew$Gene_name == "ND4L", c("TCskew", "GAskew")]
 
@@ -48,6 +48,9 @@ ggarrange(derrivedGAskew + ylim(-1.5, 1.5), derrivedTCskew + ylim(-1.5, 1.5),
             labels = c("A", "B"),
             ncol = 2, nrow = 1)  
 }
+derrivedGAskew
+derrivedTCskew\
+
 #######STATISTICS######
 #TODO: Add INVERT trigger
 cocks <- subset(subset(derrived_skew, !is.na(derrived_skew$Gene_name)), Organism == 'Cockroaches')
