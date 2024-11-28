@@ -7,7 +7,7 @@ INVERT = TRUE
 #set to true to use only CO1 skews (calculate them first)
 JUST_CO1 = FALSE
 
-TAXA <- 'Apidae'
+TAXA <- 'Blattodea'
 
 if (JUST_CO1 == TRUE){
 derrived_skew <- read.csv(glue("/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/DescriptiveStat/midori_{TAXA}_CO1_skew.csv"))
@@ -49,7 +49,7 @@ ggarrange(derrivedGAskew + ylim(-1.5, 1.5), derrivedTCskew + ylim(-1.5, 1.5),
             ncol = 2, nrow = 1)  
 }
 derrivedGAskew
-derrivedTCskew\
+derrivedTCskew
 
 #######STATISTICS######
 #TODO: Add INVERT trigger
