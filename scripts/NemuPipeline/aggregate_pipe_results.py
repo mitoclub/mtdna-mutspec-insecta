@@ -34,6 +34,7 @@ df_12_inter_complete = []
 df_192_complete = []
 df_192_inter_complete = []
 
+# DO NOT FORGET TO SWITCH TO CORRECT TAXONOMY
 tax_df = pd.read_csv(PATH_TO_TAXONOMY, header=None,sep=';')
 
 for dir in os.listdir(PATH_TO_FOLDER):
