@@ -2,6 +2,8 @@
 
 # How everything works
 
+&nbsp; -1. filter_and_extract_prots.ipynb - allows to filter MIDORI NUCL UNIQ db to extract species with at least n number of unicue seqs present in the db (n is currently 5), also filters seqs by length (currently >= 600nuc). Finaly, it extracts relevant AA seqs from MIDORI for further work with pipeline
+
 &nbsp; 0. NeMuPipeline - does mutspec magic
 
 &nbsp; 0.5. aggregate_pipe_results.py - merge mutspec tables from different species into one table
