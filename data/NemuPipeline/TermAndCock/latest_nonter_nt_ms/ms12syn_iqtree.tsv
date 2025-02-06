@@ -1,0 +1,805 @@
+Species	Mut	ObsNum	ExpNum	MutSpec
+Celatoblatta_vulgaris	A>G	2.38062	45.1105	0.425308
+Celatoblatta_vulgaris	A>T	1.02784	26.5312	0.312219
+Celatoblatta_vulgaris	T>C	1.49374	45.8652	0.262473
+Celatoblatta_vulgaris	A>C	0.0	26.5312	0.0
+Celatoblatta_vulgaris	C>G	0.0	0.99271	0.0
+Celatoblatta_vulgaris	G>T	0.0	0.509385	0.0
+Celatoblatta_vulgaris	T>A	0.0	12.9911	0.0
+Celatoblatta_vulgaris	G>C	0.0	0.509385	0.0
+Celatoblatta_vulgaris	T>G	0.0	12.9911	0.0
+Celatoblatta_vulgaris	G>A	0.0	0.759365	0.0
+Celatoblatta_vulgaris	C>T	0.0	4.32224	0.0
+Celatoblatta_vulgaris	C>A	0.0	0.99271	0.0
+Eupolyphaga_robusta	A>G	1.90169	56.364	1.0
+Eupolyphaga_robusta	T>C	0.647027	64.894	0.0
+Eupolyphaga_robusta	C>T	0.0	21.0236	0.0
+Eupolyphaga_robusta	A>C	0.0	29.6066	0.0
+Eupolyphaga_robusta	G>A	0.0	7.97826	0.0
+Eupolyphaga_robusta	C>A	0.0	9.55611	0.0
+Eupolyphaga_robusta	G>C	0.0	6.06704	0.0
+Eupolyphaga_robusta	G>T	0.0	6.06704	0.0
+Eupolyphaga_robusta	T>A	0.0	26.0321	0.0
+Eupolyphaga_robusta	T>G	0.0	26.0321	0.0
+Eupolyphaga_robusta	C>G	0.0	9.55611	0.0
+Eupolyphaga_robusta	A>T	0.0	29.6066	0.0
+Bundoksia_longissima	A>C			
+Bundoksia_longissima	A>G			
+Bundoksia_longissima	A>T			
+Bundoksia_longissima	C>A			
+Bundoksia_longissima	C>G			
+Bundoksia_longissima	C>T			
+Bundoksia_longissima	G>A			
+Bundoksia_longissima	G>C			
+Bundoksia_longissima	G>T			
+Bundoksia_longissima	T>A			
+Bundoksia_longissima	T>C			
+Bundoksia_longissima	T>G			
+Nocticola_currani	A>G	2.1766	49.2078	0.205466
+Nocticola_currani	C>T	2.74572	29.055	0.438968
+Nocticola_currani	T>C	3.85855	50.408	0.355567
+Nocticola_currani	C>G	0.0	13.4892	0.0
+Nocticola_currani	T>G	0.0	13.3351	0.0
+Nocticola_currani	G>T	0.0	0.756035	0.0
+Nocticola_currani	C>A	0.0	13.4892	0.0
+Nocticola_currani	A>C	0.0	27.6061	0.0
+Nocticola_currani	G>A	0.0	1.93864	0.0
+Nocticola_currani	A>T	0.0	27.6061	0.0
+Nocticola_currani	G>C	0.0	0.756035	0.0
+Nocticola_currani	T>A	0.0	13.3351	0.0
+Geoscapheus_dilatatus	A>C	4.35083	100.389	0.00907952
+Geoscapheus_dilatatus	A>G	31.487	185.84	0.0354952
+Geoscapheus_dilatatus	A>T	9.94202	100.389	0.0207475
+Geoscapheus_dilatatus	C>A	2.54113	16.2322	0.0327964
+Geoscapheus_dilatatus	C>T	52.8504	43.3045	0.255678
+Geoscapheus_dilatatus	G>A	17.5483	7.98203	0.460573
+Geoscapheus_dilatatus	G>T	1.79577	3.7306	0.100844
+Geoscapheus_dilatatus	T>A	6.40285	80.808	0.0165995
+Geoscapheus_dilatatus	T>C	64.6056	212.902	0.0635723
+Geoscapheus_dilatatus	T>G	1.78005	80.808	0.00461481
+Geoscapheus_dilatatus	G>C	0.0	3.7306	0.0
+Geoscapheus_dilatatus	C>G	0.0	16.2322	0.0
+Episymploce_wulingensis	A>C			
+Episymploce_wulingensis	A>G			
+Episymploce_wulingensis	A>T			
+Episymploce_wulingensis	C>A			
+Episymploce_wulingensis	C>G			
+Episymploce_wulingensis	C>T			
+Episymploce_wulingensis	G>A			
+Episymploce_wulingensis	G>C			
+Episymploce_wulingensis	G>T			
+Episymploce_wulingensis	T>A			
+Episymploce_wulingensis	T>C			
+Episymploce_wulingensis	T>G			
+Periplaneta_americana	A>C	1.99872	59.3336	0.0304709
+Periplaneta_americana	A>G	3.34384	95.6618	0.0316185
+Periplaneta_americana	A>T	1.8168	59.3336	0.0276975
+Periplaneta_americana	C>A	2.62476	9.97295	0.238068
+Periplaneta_americana	C>T	2.26119	28.2824	0.0723195
+Periplaneta_americana	G>A	1.90705	3.97238	0.434255
+Periplaneta_americana	T>A	0.715256	24.708	0.0
+Periplaneta_americana	T>C	13.7765	75.2645	0.165571
+Periplaneta_americana	C>G	0.0	9.97295	0.0
+Periplaneta_americana	G>T	0.0	2.82234	0.0
+Periplaneta_americana	T>G	0.0	24.708	0.0
+Periplaneta_americana	G>C	0.0	2.82234	0.0
+Eupolyphaga_sinensis	A>C	3.06803	41.8771	0.0208961
+Eupolyphaga_sinensis	A>G	23.7067	73.6657	0.0917883
+Eupolyphaga_sinensis	A>T	9.15298	41.8771	0.0623402
+Eupolyphaga_sinensis	C>A	2.04809	12.8912	0.0453145
+Eupolyphaga_sinensis	C>G	0.706677	12.8912	0.0
+Eupolyphaga_sinensis	C>T	20.6369	31.1466	0.18898
+Eupolyphaga_sinensis	G>A	11.7272	9.04919	0.369631
+Eupolyphaga_sinensis	G>C	1.33207	3.8918	0.0976245
+Eupolyphaga_sinensis	G>T	0.412232	3.8918	0.0
+Eupolyphaga_sinensis	T>A	5.3559	43.6084	0.0350303
+Eupolyphaga_sinensis	T>C	29.254	94.3927	0.0883953
+Eupolyphaga_sinensis	T>G	0.0	43.6084	0.0
+Episymploce_potanini	A>G	2.22566	82.3825	0.0510668
+Episymploce_potanini	C>G	0.38599	6.90101	0.0
+Episymploce_potanini	C>T	2.12569	14.196	0.283041
+Episymploce_potanini	G>A	3.15032	10.8305	0.54982
+Episymploce_potanini	T>A	0.38791	35.5101	0.0
+Episymploce_potanini	T>C	6.24911	101.767	0.116072
+Episymploce_potanini	T>G	0.385349	35.5101	0.0
+Episymploce_potanini	G>T	0.0	6.28223	0.0
+Episymploce_potanini	C>A	0.0	6.90101	0.0
+Episymploce_potanini	A>C	0.0	41.852	0.0
+Episymploce_potanini	G>C	0.0	6.28223	0.0
+Episymploce_potanini	A>T	0.0	41.852	0.0
+Sigmella_puchihlungi	A>C			
+Sigmella_puchihlungi	A>G			
+Sigmella_puchihlungi	A>T			
+Sigmella_puchihlungi	C>A			
+Sigmella_puchihlungi	C>G			
+Sigmella_puchihlungi	C>T			
+Sigmella_puchihlungi	G>A			
+Sigmella_puchihlungi	G>C			
+Sigmella_puchihlungi	G>T			
+Sigmella_puchihlungi	T>A			
+Sigmella_puchihlungi	T>C			
+Sigmella_puchihlungi	T>G			
+Periplaneta_brunnea	A>C			
+Periplaneta_brunnea	A>G			
+Periplaneta_brunnea	A>T			
+Periplaneta_brunnea	C>A			
+Periplaneta_brunnea	C>G			
+Periplaneta_brunnea	C>T			
+Periplaneta_brunnea	G>A			
+Periplaneta_brunnea	G>C			
+Periplaneta_brunnea	G>T			
+Periplaneta_brunnea	T>A			
+Periplaneta_brunnea	T>C			
+Periplaneta_brunnea	T>G			
+Cryptocercus_changbaiensis	G>A	0.992403	5.22429	0.724634
+Cryptocercus_changbaiensis	T>C	0.994835	65.4281	0.0580022
+Cryptocercus_changbaiensis	T>G	0.992264	17.4139	0.217364
+Cryptocercus_changbaiensis	C>A	0.0	5.97076	0.0
+Cryptocercus_changbaiensis	A>T	0.0	89.8104	0.0
+Cryptocercus_changbaiensis	G>C	0.0	2.23894	0.0
+Cryptocercus_changbaiensis	G>T	0.0	2.23894	0.0
+Cryptocercus_changbaiensis	C>T	0.0	41.5461	0.0
+Cryptocercus_changbaiensis	C>G	0.0	5.97076	0.0
+Cryptocercus_changbaiensis	A>G	0.0	133.596	0.0
+Cryptocercus_changbaiensis	T>A	0.0	17.4139	0.0
+Cryptocercus_changbaiensis	A>C	0.0	89.8104	0.0
+Periplaneta_fuliginosa	A>C	0.96234	49.2903	0.0726116
+Periplaneta_fuliginosa	A>G	2.88739	78.8019	0.136272
+Periplaneta_fuliginosa	C>T	1.91749	13.6186	0.523648
+Periplaneta_fuliginosa	T>A	0.99996	18.3162	0.203042
+Periplaneta_fuliginosa	T>C	0.99989	57.7205	0.064426
+Periplaneta_fuliginosa	C>G	0.0	3.97628	0.0
+Periplaneta_fuliginosa	G>C	0.0	0.564611	0.0
+Periplaneta_fuliginosa	A>T	0.0	49.2903	0.0
+Periplaneta_fuliginosa	C>A	0.0	3.97628	0.0
+Periplaneta_fuliginosa	G>T	0.0	0.564611	0.0
+Periplaneta_fuliginosa	T>G	0.0	18.3162	0.0
+Periplaneta_fuliginosa	G>A	0.0	1.45638	0.0
+Rhabdoblatta_marginata	A>C	0.974013	52.6258	0.0102024
+Rhabdoblatta_marginata	A>G	8.55105	89.0908	0.0529079
+Rhabdoblatta_marginata	A>T	2.53838	52.6258	0.0265885
+Rhabdoblatta_marginata	C>A	2.60496	7.15179	0.20078
+Rhabdoblatta_marginata	C>T	7.43513	20.2504	0.20239
+Rhabdoblatta_marginata	G>A	1.92973	2.84563	0.373812
+Rhabdoblatta_marginata	T>A	3.83653	32.4654	0.0651405
+Rhabdoblatta_marginata	T>C	11.19	90.4722	0.068179
+Rhabdoblatta_marginata	G>C	0.0	1.49028	0.0
+Rhabdoblatta_marginata	G>T	0.0	1.49028	0.0
+Rhabdoblatta_marginata	C>G	0.0	7.15179	0.0
+Rhabdoblatta_marginata	T>G	0.0	32.4654	0.0
+Ectobius_lapponicus	A>C			
+Ectobius_lapponicus	A>G			
+Ectobius_lapponicus	A>T			
+Ectobius_lapponicus	C>A			
+Ectobius_lapponicus	C>G			
+Ectobius_lapponicus	C>T			
+Ectobius_lapponicus	G>A			
+Ectobius_lapponicus	G>C			
+Ectobius_lapponicus	G>T			
+Ectobius_lapponicus	T>A			
+Ectobius_lapponicus	T>C			
+Ectobius_lapponicus	T>G			
+Panesthia_tryoni	A>C	2.19649	61.0815	0.0214768
+Panesthia_tryoni	A>G	13.2706	111.163	0.0712991
+Panesthia_tryoni	A>T	6.437	61.0815	0.0629397
+Panesthia_tryoni	C>A	1.38939	8.54965	0.0970569
+Panesthia_tryoni	C>T	16.4299	19.0013	0.516417
+Panesthia_tryoni	G>A	0.338405	1.06975	0.0
+Panesthia_tryoni	T>A	6.52848	44.6853	0.0872565
+Panesthia_tryoni	T>C	29.7072	123.594	0.143554
+Panesthia_tryoni	T>G	0.725921	44.6853	0.0
+Panesthia_tryoni	G>C	0.0	0.490215	0.0
+Panesthia_tryoni	G>T	0.0	0.490215	0.0
+Panesthia_tryoni	C>G	0.0	8.54965	0.0
+Rhabdoblatta_sinuata	A>G	3.96423	90.2669	0.302821
+Rhabdoblatta_sinuata	A>T	1.96432	49.4432	0.273944
+Rhabdoblatta_sinuata	C>T	0.999953	16.2913	0.423234
+Rhabdoblatta_sinuata	G>C	0.0	1.38568	0.0
+Rhabdoblatta_sinuata	A>C	0.0	49.4432	0.0
+Rhabdoblatta_sinuata	C>A	0.0	6.27164	0.0
+Rhabdoblatta_sinuata	G>T	0.0	1.38568	0.0
+Rhabdoblatta_sinuata	C>G	0.0	6.27164	0.0
+Rhabdoblatta_sinuata	T>C	0.0	95.5667	0.0
+Rhabdoblatta_sinuata	T>A	0.0	35.3162	0.0
+Rhabdoblatta_sinuata	T>G	0.0	35.3162	0.0
+Rhabdoblatta_sinuata	G>A	0.0	2.18566	0.0
+Supella_longipalpa	A>C			
+Supella_longipalpa	A>G			
+Supella_longipalpa	A>T			
+Supella_longipalpa	C>A			
+Supella_longipalpa	C>G			
+Supella_longipalpa	C>T			
+Supella_longipalpa	G>A			
+Supella_longipalpa	G>C			
+Supella_longipalpa	G>T			
+Supella_longipalpa	T>A			
+Supella_longipalpa	T>C			
+Supella_longipalpa	T>G			
+Parcoblatta_pensylvanica	A>C			
+Parcoblatta_pensylvanica	A>G			
+Parcoblatta_pensylvanica	A>T			
+Parcoblatta_pensylvanica	C>A			
+Parcoblatta_pensylvanica	C>G			
+Parcoblatta_pensylvanica	C>T			
+Parcoblatta_pensylvanica	G>A			
+Parcoblatta_pensylvanica	G>C			
+Parcoblatta_pensylvanica	G>T			
+Parcoblatta_pensylvanica	T>A			
+Parcoblatta_pensylvanica	T>C			
+Parcoblatta_pensylvanica	T>G			
+Hemiblabera_pabulator	A>C			
+Hemiblabera_pabulator	A>G			
+Hemiblabera_pabulator	A>T			
+Hemiblabera_pabulator	C>A			
+Hemiblabera_pabulator	C>G			
+Hemiblabera_pabulator	C>T			
+Hemiblabera_pabulator	G>A			
+Hemiblabera_pabulator	G>C			
+Hemiblabera_pabulator	G>T			
+Hemiblabera_pabulator	T>A			
+Hemiblabera_pabulator	T>C			
+Hemiblabera_pabulator	T>G			
+Margattea_concava	A>G	1.11037	50.3144	0.210606
+Margattea_concava	C>T	0.999774	12.0865	0.789394
+Margattea_concava	T>C	0.368255	45.8832	0.0
+Margattea_concava	C>G	0.0	5.43865	0.0
+Margattea_concava	A>T	0.0	30.6293	0.0
+Margattea_concava	A>C	0.0	30.6293	0.0
+Margattea_concava	T>A	0.0	17.1482	0.0
+Margattea_concava	T>G	0.0	17.1482	0.0
+Margattea_concava	G>C	0.0	0.975229	0.0
+Margattea_concava	G>T	0.0	0.975229	0.0
+Margattea_concava	C>A	0.0	5.43865	0.0
+Margattea_concava	G>A	0.0	1.09882	0.0
+Margattea_spinosa	A>G	1.54783	87.1338	0.221058
+Margattea_spinosa	A>T	0.999974	53.8944	0.230894
+Margattea_spinosa	C>T	0.999974	32.0989	0.387673
+Margattea_spinosa	T>C	0.999859	77.5837	0.160375
+Margattea_spinosa	C>A	0.0	10.0264	0.0
+Margattea_spinosa	T>A	0.0	32.3919	0.0
+Margattea_spinosa	G>T	0.0	5.0994	0.0
+Margattea_spinosa	A>C	0.0	53.8944	0.0
+Margattea_spinosa	G>A	0.0	8.42131	0.0
+Margattea_spinosa	C>G	0.0	10.0264	0.0
+Margattea_spinosa	G>C	0.0	5.0994	0.0
+Margattea_spinosa	T>G	0.0	32.3919	0.0
+Blattella_lituricollis	A>G	2.96241	96.487	0.11393
+Blattella_lituricollis	C>T	1.95925	13.4358	0.541112
+Blattella_lituricollis	T>C	10.8371	116.576	0.344958
+Blattella_lituricollis	T>G	0.0	46.8931	0.0
+Blattella_lituricollis	G>T	0.0	0.199992	0.0
+Blattella_lituricollis	C>A	0.0	4.67573	0.0
+Blattella_lituricollis	A>T	0.0	53.4125	0.0
+Blattella_lituricollis	G>A	0.0	0.333323	0.0
+Blattella_lituricollis	G>C	0.0	0.199992	0.0
+Blattella_lituricollis	C>G	0.0	4.67573	0.0
+Blattella_lituricollis	T>A	0.0	46.8931	0.0
+Blattella_lituricollis	A>C	0.0	53.4125	0.0
+Eupolyphaga_hanae	A>C			
+Eupolyphaga_hanae	A>G			
+Eupolyphaga_hanae	A>T			
+Eupolyphaga_hanae	C>A			
+Eupolyphaga_hanae	C>G			
+Eupolyphaga_hanae	C>T			
+Eupolyphaga_hanae	G>A			
+Eupolyphaga_hanae	G>C			
+Eupolyphaga_hanae	G>T			
+Eupolyphaga_hanae	T>A			
+Eupolyphaga_hanae	T>C			
+Eupolyphaga_hanae	T>G			
+Cryptocercus_hirtus	A>G	1.49992	74.5951	0.478658
+Cryptocercus_hirtus	T>C	1.00049	45.6831	0.521342
+Cryptocercus_hirtus	T>G	0.0	18.1477	0.0
+Cryptocercus_hirtus	A>T	0.0	50.4387	0.0
+Cryptocercus_hirtus	C>A	0.0	3.88038	0.0
+Cryptocercus_hirtus	G>T	0.0	3.88039	0.0
+Cryptocercus_hirtus	A>C	0.0	50.4387	0.0
+Cryptocercus_hirtus	C>T	0.0	26.4093	0.0
+Cryptocercus_hirtus	G>C	0.0	3.88039	0.0
+Cryptocercus_hirtus	T>A	0.0	18.1477	0.0
+Cryptocercus_hirtus	C>G	0.0	3.88038	0.0
+Cryptocercus_hirtus	G>A	0.0	5.38192	0.0
+Rhabdoblatta_nigrovittata	A>C	2.83685	44.5974	0.0767934
+Rhabdoblatta_nigrovittata	A>G	4.79726	83.6685	0.0692194
+Rhabdoblatta_nigrovittata	C>T	11.547	29.8259	0.467382
+Rhabdoblatta_nigrovittata	G>A	0.958825	4.43638	0.26092
+Rhabdoblatta_nigrovittata	T>A	0.999973	40.0059	0.0301759
+Rhabdoblatta_nigrovittata	T>C	7.52964	95.1752	0.0955095
+Rhabdoblatta_nigrovittata	A>T	0.0	44.5974	0.0
+Rhabdoblatta_nigrovittata	C>A	0.0	10.7271	0.0
+Rhabdoblatta_nigrovittata	G>T	0.0	3.23364	0.0
+Rhabdoblatta_nigrovittata	C>G	0.0	10.7271	0.0
+Rhabdoblatta_nigrovittata	T>G	0.0	40.0059	0.0
+Rhabdoblatta_nigrovittata	G>C	0.0	3.23364	0.0
+Anaplecta_omei	A>G	1.33995	65.6846	0.0611021
+Anaplecta_omei	C>T	1.99978	38.8394	0.15422
+Anaplecta_omei	G>A	1.66639	7.64561	0.652823
+Anaplecta_omei	T>C	2.28734	51.9596	0.131855
+Anaplecta_omei	T>A	0.0	21.273	0.0
+Anaplecta_omei	A>C	0.0	47.5189	0.0
+Anaplecta_omei	G>T	0.0	2.94149	0.0
+Anaplecta_omei	T>G	0.0	21.273	0.0
+Anaplecta_omei	G>C	0.0	2.94149	0.0
+Anaplecta_omei	C>G	0.0	16.3983	0.0
+Anaplecta_omei	C>A	0.0	16.3983	0.0
+Anaplecta_omei	A>T	0.0	47.5189	0.0
+Rhabdoblatta_melancholica	A>C	1.8045	41.1262	0.0338154
+Rhabdoblatta_melancholica	A>G	6.25522	72.4427	0.0665465
+Rhabdoblatta_melancholica	A>T	3.0486	41.1262	0.0571293
+Rhabdoblatta_melancholica	C>A	0.957411	5.82738	0.12662
+Rhabdoblatta_melancholica	C>T	11.8263	18.8551	0.483388
+Rhabdoblatta_melancholica	G>A	0.453715	3.62776	0.0
+Rhabdoblatta_melancholica	T>A	1.78672	38.9076	0.0353915
+Rhabdoblatta_melancholica	T>C	19.3468	86.9106	0.171559
+Rhabdoblatta_melancholica	T>G	1.28992	38.9076	0.0255508
+Rhabdoblatta_melancholica	C>G	0.0	5.82738	0.0
+Rhabdoblatta_melancholica	G>T	0.0	1.57624	0.0
+Rhabdoblatta_melancholica	G>C	0.0	1.57624	0.0
+Margattea_bisignata	A>G	7.40358	90.3063	0.116098
+Margattea_bisignata	A>T	1.7982	53.8278	0.0473078
+Margattea_bisignata	C>A	0.837147	10.7194	0.0
+Margattea_bisignata	C>T	4.11505	30.1064	0.193561
+Margattea_bisignata	G>A	2.56962	7.75871	0.469008
+Margattea_bisignata	G>T	0.39723	4.63439	0.0
+Margattea_bisignata	T>C	9.96344	81.077	0.174026
+Margattea_bisignata	G>C	0.0	4.63439	0.0
+Margattea_bisignata	A>C	0.0	53.8278	0.0
+Margattea_bisignata	T>A	0.0	29.3633	0.0
+Margattea_bisignata	C>G	0.0	10.7194	0.0
+Margattea_bisignata	T>G	0.0	29.3633	0.0
+Blattella_germanica	A>C	0.999706	26.7793	0.0397712
+Blattella_germanica	A>G	0.70574	49.9184	0.0
+Blattella_germanica	C>T	5.4566	10.0543	0.578185
+Blattella_germanica	G>A	0.999606	3.27119	0.32555
+Blattella_germanica	T>C	3.31133	62.4454	0.0564934
+Blattella_germanica	C>A	0.0	4.74845	0.0
+Blattella_germanica	C>G	0.0	4.74845	0.0
+Blattella_germanica	T>G	0.0	28.5194	0.0
+Blattella_germanica	A>T	0.0	26.7793	0.0
+Blattella_germanica	T>A	0.0	28.5194	0.0
+Blattella_germanica	G>C	0.0	1.81206	0.0
+Blattella_germanica	G>T	0.0	1.81206	0.0
+Blattella_singularis	A>G	2.97324	48.168	0.254822
+Blattella_singularis	A>T	0.991086	23.7864	0.172008
+Blattella_singularis	C>T	0.990769	7.13599	0.57317
+Blattella_singularis	G>C	0.0	1.18934	0.0
+Blattella_singularis	A>C	0.0	23.7864	0.0
+Blattella_singularis	T>A	0.0	20.8135	0.0
+Blattella_singularis	T>C	0.0	57.0885	0.0
+Blattella_singularis	G>T	0.0	1.18934	0.0
+Blattella_singularis	C>G	0.0	4.1627	0.0
+Blattella_singularis	G>A	0.0	1.78401	0.0
+Blattella_singularis	C>A	0.0	4.1627	0.0
+Blattella_singularis	T>G	0.0	20.8135	0.0
+Celatoblatta_brunni	A>G	1.99797	84.0678	0.197754
+Celatoblatta_brunni	C>T	0.999611	10.3679	0.802246
+Celatoblatta_brunni	G>A	0.999611	0.874367	0.0
+Celatoblatta_brunni	T>C	0.0	87.5654	0.0
+Celatoblatta_brunni	T>A	0.0	26.8567	0.0
+Celatoblatta_brunni	G>T	0.0	0.874367	0.0
+Celatoblatta_brunni	A>T	0.0	46.0936	0.0
+Celatoblatta_brunni	A>C	0.0	46.0936	0.0
+Celatoblatta_brunni	C>G	0.0	2.99796	0.0
+Celatoblatta_brunni	G>C	0.0	0.874367	0.0
+Celatoblatta_brunni	C>A	0.0	2.99796	0.0
+Celatoblatta_brunni	T>G	0.0	26.8567	0.0
+Polyzosteria_yingina	A>G	0.71256	65.106	0.0
+Polyzosteria_yingina	A>T	1.77992	41.1015	0.441418
+Polyzosteria_yingina	C>T	1.42511	26.0058	0.558582
+Polyzosteria_yingina	T>A	0.0	22.1347	0.0
+Polyzosteria_yingina	G>T	0.0	4.31293	0.0
+Polyzosteria_yingina	G>C	0.0	4.31293	0.0
+Polyzosteria_yingina	A>C	0.0	41.1015	0.0
+Polyzosteria_yingina	G>A	0.0	7.90705	0.0
+Polyzosteria_yingina	T>C	0.0	55.6322	0.0
+Polyzosteria_yingina	C>G	0.0	9.34467	0.0
+Polyzosteria_yingina	T>G	0.0	22.1347	0.0
+Polyzosteria_yingina	C>A	0.0	9.34467	0.0
+Cryptocercus_laojunensis	A>C	0.999963	65.9955	0.209725
+Cryptocercus_laojunensis	C>T	0.996611	25.4975	0.541015
+Cryptocercus_laojunensis	T>C	0.999383	55.4961	0.249259
+Cryptocercus_laojunensis	G>T	0.0	2.99982	0.0
+Cryptocercus_laojunensis	G>A	0.0	3.49978	0.0
+Cryptocercus_laojunensis	C>A	0.0	4.99968	0.0
+Cryptocercus_laojunensis	T>G	0.0	13.4991	0.0
+Cryptocercus_laojunensis	A>G	0.0	100.243	0.0
+Cryptocercus_laojunensis	C>G	0.0	4.99968	0.0
+Cryptocercus_laojunensis	G>C	0.0	2.99982	0.0
+Cryptocercus_laojunensis	A>T	0.0	65.9955	0.0
+Cryptocercus_laojunensis	T>A	0.0	13.4991	0.0
+Blattella_sauteri	A>G	0.999133	57.9677	1.0
+Blattella_sauteri	G>T	0.0	1.39927	0.0
+Blattella_sauteri	G>A	0.0	2.99833	0.0
+Blattella_sauteri	C>T	0.0	16.7905	0.0
+Blattella_sauteri	G>C	0.0	1.39927	0.0
+Blattella_sauteri	C>A	0.0	7.9956	0.0
+Blattella_sauteri	A>T	0.0	30.3829	0.0
+Blattella_sauteri	T>C	0.0	70.361	0.0
+Blattella_sauteri	A>C	0.0	30.3829	0.0
+Blattella_sauteri	C>G	0.0	7.9956	0.0
+Blattella_sauteri	T>G	0.0	26.5853	0.0
+Blattella_sauteri	T>A	0.0	26.5853	0.0
+Cryptocercus_luanchuanensis	A>G	1.98656	99.1112	0.228118
+Cryptocercus_luanchuanensis	C>T	0.655315	33.4731	0.0
+Cryptocercus_luanchuanensis	T>A	0.673868	19.5186	0.0
+Cryptocercus_luanchuanensis	T>C	3.76655	55.5359	0.771882
+Cryptocercus_luanchuanensis	A>T	0.0	64.4557	0.0
+Cryptocercus_luanchuanensis	G>T	0.0	6.63327	0.0
+Cryptocercus_luanchuanensis	T>G	0.0	19.5186	0.0
+Cryptocercus_luanchuanensis	G>C	0.0	6.63327	0.0
+Cryptocercus_luanchuanensis	A>C	0.0	64.4557	0.0
+Cryptocercus_luanchuanensis	G>A	0.0	7.44187	0.0
+Cryptocercus_luanchuanensis	C>G	0.0	6.46824	0.0
+Cryptocercus_luanchuanensis	C>A	0.0	6.46824	0.0
+Panchlora_nivea	A>G	8.77641	68.7909	0.416854
+Panchlora_nivea	A>T	0.575773	39.5283	0.0
+Panchlora_nivea	C>A	0.313829	7.20516	0.0
+Panchlora_nivea	C>T	1.96915	20.6403	0.311717
+Panchlora_nivea	G>A	0.416672	6.98898	0.0
+Panchlora_nivea	T>C	6.33978	76.3161	0.271429
+Panchlora_nivea	T>G	0.0	32.5278	0.0
+Panchlora_nivea	G>T	0.0	5.26725	0.0
+Panchlora_nivea	A>C	0.0	39.5283	0.0
+Panchlora_nivea	T>A	0.0	32.5278	0.0
+Panchlora_nivea	C>G	0.0	7.20516	0.0
+Panchlora_nivea	G>C	0.0	5.26725	0.0
+Cryptocercus_punctulatus	A>C	0.601079	82.8045	0.0
+Cryptocercus_punctulatus	A>G	33.8494	137.543	0.0417049
+Cryptocercus_punctulatus	A>T	12.233	82.8045	0.0250353
+Cryptocercus_punctulatus	C>A	6.33595	10.1261	0.106034
+Cryptocercus_punctulatus	C>T	78.0962	44.3572	0.29836
+Cryptocercus_punctulatus	G>A	7.35974	3.92938	0.317405
+Cryptocercus_punctulatus	G>T	0.639513	2.32633	0.0
+Cryptocercus_punctulatus	T>A	3.96378	21.7266	0.0309166
+Cryptocercus_punctulatus	T>C	82.7952	83.8489	0.167333
+Cryptocercus_punctulatus	T>G	1.69379	21.7266	0.0132112
+Cryptocercus_punctulatus	C>G	0.0	10.1261	0.0
+Cryptocercus_punctulatus	G>C	0.0	2.32633	0.0
+Diploptera_maculata	T>C	1.9901	84.6547	1.0
+Diploptera_maculata	G>C	0.0	5.97569	0.0
+Diploptera_maculata	A>G	0.0	97.6029	0.0
+Diploptera_maculata	A>C	0.0	63.7407	0.0
+Diploptera_maculata	T>G	0.0	36.8492	0.0
+Diploptera_maculata	C>A	0.0	16.9319	0.0
+Diploptera_maculata	G>A	0.0	9.95948	0.0
+Diploptera_maculata	T>A	0.0	36.8492	0.0
+Diploptera_maculata	G>T	0.0	5.97569	0.0
+Diploptera_maculata	A>T	0.0	63.7407	0.0
+Diploptera_maculata	C>G	0.0	16.9319	0.0
+Diploptera_maculata	C>T	0.0	51.7901	0.0
+Hebardina_concinna	A>G	6.41109	106.311	0.0736683
+Hebardina_concinna	A>T	1.96609	58.2509	0.0412315
+Hebardina_concinna	C>T	2.90424	11.9019	0.298086
+Hebardina_concinna	G>A	0.999953	2.46066	0.496427
+Hebardina_concinna	T>A	0.910877	36.7035	0.0303166
+Hebardina_concinna	T>C	5.23468	106.099	0.0602706
+Hebardina_concinna	G>T	0.0	1.18653	0.0
+Hebardina_concinna	T>G	0.0	36.7035	0.0
+Hebardina_concinna	C>A	0.0	3.74356	0.0
+Hebardina_concinna	G>C	0.0	1.18653	0.0
+Hebardina_concinna	C>G	0.0	3.74356	0.0
+Hebardina_concinna	A>C	0.0	58.2509	0.0
+Sigmella_normalis	A>C			
+Sigmella_normalis	A>G			
+Sigmella_normalis	A>T			
+Sigmella_normalis	C>A			
+Sigmella_normalis	C>G			
+Sigmella_normalis	C>T			
+Sigmella_normalis	G>A			
+Sigmella_normalis	G>C			
+Sigmella_normalis	G>T			
+Sigmella_normalis	T>A			
+Sigmella_normalis	T>C			
+Sigmella_normalis	T>G			
+Celatoblatta_quinquemaculata	A>C			
+Celatoblatta_quinquemaculata	A>G			
+Celatoblatta_quinquemaculata	A>T			
+Celatoblatta_quinquemaculata	C>A			
+Celatoblatta_quinquemaculata	C>G			
+Celatoblatta_quinquemaculata	C>T			
+Celatoblatta_quinquemaculata	G>A			
+Celatoblatta_quinquemaculata	G>C			
+Celatoblatta_quinquemaculata	G>T			
+Celatoblatta_quinquemaculata	T>A			
+Celatoblatta_quinquemaculata	T>C			
+Celatoblatta_quinquemaculata	T>G			
+Cryptocercus_gexigouensis	A>G	0.315529	119.859	0.0
+Cryptocercus_gexigouensis	C>T	0.999579	35.6496	0.177377
+Cryptocercus_gexigouensis	G>A	0.9998	7.6886	0.822623
+Cryptocercus_gexigouensis	A>C	0.0	77.0445	0.0
+Cryptocercus_gexigouensis	G>T	0.0	4.55742	0.0
+Cryptocercus_gexigouensis	T>C	0.0	64.8575	0.0
+Cryptocercus_gexigouensis	A>T	0.0	77.0445	0.0
+Cryptocercus_gexigouensis	C>A	0.0	8.77229	0.0
+Cryptocercus_gexigouensis	C>G	0.0	8.77229	0.0
+Cryptocercus_gexigouensis	T>A	0.0	14.8396	0.0
+Cryptocercus_gexigouensis	T>G	0.0	14.8396	0.0
+Cryptocercus_gexigouensis	G>C	0.0	4.55742	0.0
+Brephallus_fruhstorferi	A>G	1.84859	49.9985	0.224686
+Brephallus_fruhstorferi	C>T	0.999783	14.3486	0.423438
+Brephallus_fruhstorferi	T>C	3.50714	60.57	0.351875
+Brephallus_fruhstorferi	T>G	0.0	24.7608	0.0
+Brephallus_fruhstorferi	G>A	0.0	3.82123	0.0
+Brephallus_fruhstorferi	G>C	0.0	1.05537	0.0
+Brephallus_fruhstorferi	A>C	0.0	28.6927	0.0
+Brephallus_fruhstorferi	A>T	0.0	28.6927	0.0
+Brephallus_fruhstorferi	C>G	0.0	5.83345	0.0
+Brephallus_fruhstorferi	G>T	0.0	1.05537	0.0
+Brephallus_fruhstorferi	C>A	0.0	5.83345	0.0
+Brephallus_fruhstorferi	T>A	0.0	24.7608	0.0
+Celatoblatta_notialis	A>G	0.997235	57.7724	0.0497209
+Celatoblatta_notialis	A>T	0.99849	31.4877	0.0913408
+Celatoblatta_notialis	C>T	1.9969	8.05516	0.714074
+Celatoblatta_notialis	T>C	3.30057	65.6279	0.144864
+Celatoblatta_notialis	T>A	0.0	23.078	0.0
+Celatoblatta_notialis	A>C	0.0	31.4877	0.0
+Celatoblatta_notialis	G>A	0.0	1.24284	0.0
+Celatoblatta_notialis	G>T	0.0	0.521651	0.0
+Celatoblatta_notialis	T>G	0.0	23.078	0.0
+Celatoblatta_notialis	C>A	0.0	1.56448	0.0
+Celatoblatta_notialis	C>G	0.0	1.56448	0.0
+Celatoblatta_notialis	G>C	0.0	0.521651	0.0
+Nocticola_quartermainei	A>C			
+Nocticola_quartermainei	A>G			
+Nocticola_quartermainei	A>T			
+Nocticola_quartermainei	C>A			
+Nocticola_quartermainei	C>G			
+Nocticola_quartermainei	C>T			
+Nocticola_quartermainei	G>A			
+Nocticola_quartermainei	G>C			
+Nocticola_quartermainei	G>T			
+Nocticola_quartermainei	T>A			
+Nocticola_quartermainei	T>C			
+Nocticola_quartermainei	T>G			
+Margattea_spinifera	A>C	0.800346	51.4177	0.0
+Margattea_spinifera	A>G	2.79167	94.4981	0.0616208
+Margattea_spinifera	C>A	0.999824	12.0974	0.172393
+Margattea_spinifera	C>T	3.32798	35.3258	0.196506
+Margattea_spinifera	G>A	1.43212	6.49864	0.459669
+Margattea_spinifera	T>C	5.1726	98.2536	0.109811
+Margattea_spinifera	T>G	0.0	44.4748	0.0
+Margattea_spinifera	A>T	0.0	51.4177	0.0
+Margattea_spinifera	G>C	0.0	5.34052	0.0
+Margattea_spinifera	C>G	0.0	12.0974	0.0
+Margattea_spinifera	T>A	0.0	44.4748	0.0
+Margattea_spinifera	G>T	0.0	5.34052	0.0
+Sigmella_schenklingi	A>C	5.90238	69.4321	0.0202186
+Sigmella_schenklingi	A>G	14.5514	101.601	0.0340635
+Sigmella_schenklingi	A>T	8.09531	69.4321	0.0277304
+Sigmella_schenklingi	C>A	1.99957	20.7602	0.022908
+Sigmella_schenklingi	C>G	0.942709	20.7602	0.0108001
+Sigmella_schenklingi	C>T	26.4104	65.5191	0.0958718
+Sigmella_schenklingi	G>A	15.1182	6.04561	0.594763
+Sigmella_schenklingi	G>T	0.999949	3.83742	0.0619759
+Sigmella_schenklingi	T>A	4.92819	22.7509	0.0515198
+Sigmella_schenklingi	T>C	21.6682	64.2999	0.0801486
+Sigmella_schenklingi	T>G	0.0	22.7509	0.0
+Sigmella_schenklingi	G>C	0.0	3.83742	0.0
+Eupolyphaga_yunnanensis	A>G	1.8918	53.6805	0.452441
+Eupolyphaga_yunnanensis	C>T	0.32194	27.3965	0.0
+Eupolyphaga_yunnanensis	G>A	0.446738	7.63276	0.0
+Eupolyphaga_yunnanensis	T>G	0.99999	23.4459	0.547559
+Eupolyphaga_yunnanensis	T>A	0.0	23.4459	0.0
+Eupolyphaga_yunnanensis	C>A	0.0	10.7432	0.0
+Eupolyphaga_yunnanensis	G>C	0.0	4.76722	0.0
+Eupolyphaga_yunnanensis	G>T	0.0	4.76722	0.0
+Eupolyphaga_yunnanensis	T>C	0.0	55.4724	0.0
+Eupolyphaga_yunnanensis	A>C	0.0	33.3788	0.0
+Eupolyphaga_yunnanensis	A>T	0.0	33.3788	0.0
+Eupolyphaga_yunnanensis	C>G	0.0	10.7432	0.0
+Nauphoeta_cinerea	A>C			
+Nauphoeta_cinerea	A>G			
+Nauphoeta_cinerea	A>T			
+Nauphoeta_cinerea	C>A			
+Nauphoeta_cinerea	C>G			
+Nauphoeta_cinerea	C>T			
+Nauphoeta_cinerea	G>A			
+Nauphoeta_cinerea	G>C			
+Nauphoeta_cinerea	G>T			
+Nauphoeta_cinerea	T>A			
+Nauphoeta_cinerea	T>C			
+Nauphoeta_cinerea	T>G			
+Cryptocercus_relictus	A>C			
+Cryptocercus_relictus	A>G			
+Cryptocercus_relictus	A>T			
+Cryptocercus_relictus	C>A			
+Cryptocercus_relictus	C>G			
+Cryptocercus_relictus	C>T			
+Cryptocercus_relictus	G>A			
+Cryptocercus_relictus	G>C			
+Cryptocercus_relictus	G>T			
+Cryptocercus_relictus	T>A			
+Cryptocercus_relictus	T>C			
+Cryptocercus_relictus	T>G			
+Pseudothyrsocera_sinensis	A>C			
+Pseudothyrsocera_sinensis	A>G			
+Pseudothyrsocera_sinensis	A>T			
+Pseudothyrsocera_sinensis	C>A			
+Pseudothyrsocera_sinensis	C>G			
+Pseudothyrsocera_sinensis	C>T			
+Pseudothyrsocera_sinensis	G>A			
+Pseudothyrsocera_sinensis	G>C			
+Pseudothyrsocera_sinensis	G>T			
+Pseudothyrsocera_sinensis	T>A			
+Pseudothyrsocera_sinensis	T>C			
+Pseudothyrsocera_sinensis	T>G			
+Arenivaga_floridensis	A>C	0.40679	56.7757	0.0
+Arenivaga_floridensis	A>G	27.9413	115.133	0.0295123
+Arenivaga_floridensis	A>T	5.4037	56.7757	0.0115741
+Arenivaga_floridensis	C>T	60.2684	21.8496	0.335431
+Arenivaga_floridensis	G>A	7.62969	3.16869	0.292809
+Arenivaga_floridensis	G>T	1.72498	1.00581	0.208558
+Arenivaga_floridensis	T>A	6.23252	35.9478	0.0210838
+Arenivaga_floridensis	T>C	91.8103	115.555	0.0966183
+Arenivaga_floridensis	T>G	1.30451	35.9478	0.004413
+Arenivaga_floridensis	C>A	0.0	5.42934	0.0
+Arenivaga_floridensis	G>C	0.0	1.00581	0.0
+Arenivaga_floridensis	C>G	0.0	5.42934	0.0
+Blattella_bisignata	A>G	15.0292	83.6416	0.110963
+Blattella_bisignata	A>T	3.70346	43.5934	0.0524627
+Blattella_bisignata	C>A	1.85513	7.78686	0.147122
+Blattella_bisignata	C>T	7.50378	15.8346	0.292643
+Blattella_bisignata	G>A	1.86313	4.4799	0.256825
+Blattella_bisignata	T>A	2.81811	40.4069	0.0430692
+Blattella_bisignata	T>C	15.8701	101.123	0.0969156
+Blattella_bisignata	A>C	0.0	43.5934	0.0
+Blattella_bisignata	C>G	0.0	7.78686	0.0
+Blattella_bisignata	G>C	0.0	3.40807	0.0
+Blattella_bisignata	T>G	0.0	40.4069	0.0
+Blattella_bisignata	G>T	0.0	3.40807	0.0
+Margattea_nimbata	A>G	0.89657	83.3656	0.0
+Margattea_nimbata	C>T	0.827094	24.7246	0.0
+Margattea_nimbata	T>C	2.24317	73.3862	1.0
+Margattea_nimbata	T>A	0.0	21.4962	0.0
+Margattea_nimbata	C>G	0.0	10.4216	0.0
+Margattea_nimbata	A>C	0.0	46.9042	0.0
+Margattea_nimbata	T>G	0.0	21.4962	0.0
+Margattea_nimbata	A>T	0.0	46.9042	0.0
+Margattea_nimbata	G>C	0.0	1.30291	0.0
+Margattea_nimbata	G>T	0.0	1.30291	0.0
+Margattea_nimbata	C>A	0.0	10.4216	0.0
+Margattea_nimbata	G>A	0.0	1.95434	0.0
+Sinatablatta_hoplites	A>C			
+Sinatablatta_hoplites	A>G			
+Sinatablatta_hoplites	A>T			
+Sinatablatta_hoplites	C>A			
+Sinatablatta_hoplites	C>G			
+Sinatablatta_hoplites	C>T			
+Sinatablatta_hoplites	G>A			
+Sinatablatta_hoplites	G>C			
+Sinatablatta_hoplites	G>T			
+Sinatablatta_hoplites	T>A			
+Sinatablatta_hoplites	T>C			
+Sinatablatta_hoplites	T>G			
+Anaplectoidea_varia	A>C			
+Anaplectoidea_varia	A>G			
+Anaplectoidea_varia	A>T			
+Anaplectoidea_varia	C>A			
+Anaplectoidea_varia	C>G			
+Anaplectoidea_varia	C>T			
+Anaplectoidea_varia	G>A			
+Anaplectoidea_varia	G>C			
+Anaplectoidea_varia	G>T			
+Anaplectoidea_varia	T>A			
+Anaplectoidea_varia	T>C			
+Anaplectoidea_varia	T>G			
+Diploptera_punctata	A>C			
+Diploptera_punctata	A>G			
+Diploptera_punctata	A>T			
+Diploptera_punctata	C>A			
+Diploptera_punctata	C>G			
+Diploptera_punctata	C>T			
+Diploptera_punctata	G>A			
+Diploptera_punctata	G>C			
+Diploptera_punctata	G>T			
+Diploptera_punctata	T>A			
+Diploptera_punctata	T>C			
+Diploptera_punctata	T>G			
+Periplaneta_lateralis	A>C			
+Periplaneta_lateralis	A>G			
+Periplaneta_lateralis	A>T			
+Periplaneta_lateralis	C>A			
+Periplaneta_lateralis	C>G			
+Periplaneta_lateralis	C>T			
+Periplaneta_lateralis	G>A			
+Periplaneta_lateralis	G>C			
+Periplaneta_lateralis	G>T			
+Periplaneta_lateralis	T>A			
+Periplaneta_lateralis	T>C			
+Periplaneta_lateralis	T>G			
+Ectobius_pallidus	A>C			
+Ectobius_pallidus	A>G			
+Ectobius_pallidus	A>T			
+Ectobius_pallidus	C>A			
+Ectobius_pallidus	C>G			
+Ectobius_pallidus	C>T			
+Ectobius_pallidus	G>A			
+Ectobius_pallidus	G>C			
+Ectobius_pallidus	G>T			
+Ectobius_pallidus	T>A			
+Ectobius_pallidus	T>C			
+Ectobius_pallidus	T>G			
+Blaptica_dubia	A>C			
+Blaptica_dubia	A>G			
+Blaptica_dubia	A>T			
+Blaptica_dubia	C>A			
+Blaptica_dubia	C>G			
+Blaptica_dubia	C>T			
+Blaptica_dubia	G>A			
+Blaptica_dubia	G>C			
+Blaptica_dubia	G>T			
+Blaptica_dubia	T>A			
+Blaptica_dubia	T>C			
+Blaptica_dubia	T>G			
+Periplaneta_australasiae	A>G	0.998091	72.0814	0.14616
+Periplaneta_australasiae	C>T	0.99881	15.3152	0.688398
+Periplaneta_australasiae	T>C	0.99931	63.7579	0.165442
+Periplaneta_australasiae	T>G	0.0	22.8061	0.0
+Periplaneta_australasiae	A>T	0.0	41.9502	0.0
+Periplaneta_australasiae	C>A	0.0	4.9943	0.0
+Periplaneta_australasiae	C>G	0.0	4.9943	0.0
+Periplaneta_australasiae	G>A	0.0	3.3296	0.0
+Periplaneta_australasiae	G>C	0.0	1.83127	0.0
+Periplaneta_australasiae	A>C	0.0	41.9502	0.0
+Periplaneta_australasiae	T>A	0.0	22.8061	0.0
+Periplaneta_australasiae	G>T	0.0	1.83127	0.0
+Rhabdoblatta_densimaculata	A>G	0.597015	73.9069	0.0
+Rhabdoblatta_densimaculata	T>C	1.99978	86.3274	1.0
+Rhabdoblatta_densimaculata	G>T	0.0	1.2091	0.0
+Rhabdoblatta_densimaculata	T>A	0.0	34.7294	0.0
+Rhabdoblatta_densimaculata	A>T	0.0	40.0834	0.0
+Rhabdoblatta_densimaculata	C>G	0.0	2.82773	0.0
+Rhabdoblatta_densimaculata	T>G	0.0	34.7294	0.0
+Rhabdoblatta_densimaculata	A>C	0.0	40.0834	0.0
+Rhabdoblatta_densimaculata	G>C	0.0	1.2091	0.0
+Rhabdoblatta_densimaculata	G>A	0.0	1.70908	0.0
+Rhabdoblatta_densimaculata	C>A	0.0	2.82773	0.0
+Rhabdoblatta_densimaculata	C>T	0.0	10.5542	0.0
+Opisthoplatia_orientalis	A>C			
+Opisthoplatia_orientalis	A>G			
+Opisthoplatia_orientalis	A>T			
+Opisthoplatia_orientalis	C>A			
+Opisthoplatia_orientalis	C>G			
+Opisthoplatia_orientalis	C>T			
+Opisthoplatia_orientalis	G>A			
+Opisthoplatia_orientalis	G>C			
+Opisthoplatia_orientalis	G>T			
+Opisthoplatia_orientalis	T>A			
+Opisthoplatia_orientalis	T>C			
+Opisthoplatia_orientalis	T>G			
+Blatta_orientalis	A>C			
+Blatta_orientalis	A>G			
+Blatta_orientalis	A>T			
+Blatta_orientalis	C>A			
+Blatta_orientalis	C>G			
+Blatta_orientalis	C>T			
+Blatta_orientalis	G>A			
+Blatta_orientalis	G>C			
+Blatta_orientalis	G>T			
+Blatta_orientalis	T>A			
+Blatta_orientalis	T>C			
+Blatta_orientalis	T>G			
+Blattella_nipponica	A>C	0.97321	45.8743	0.0139202
+Blattella_nipponica	A>G	6.32656	83.5211	0.0497026
+Blattella_nipponica	A>T	0.999938	45.8743	0.0143025
+Blattella_nipponica	C>T	4.6408	18.619	0.163548
+Blattella_nipponica	G>A	4.94134	5.91702	0.547961
+Blattella_nipponica	G>T	0.904939	4.09561	0.14498
+Blattella_nipponica	T>C	8.71192	87.1584	0.0655862
+Blattella_nipponica	T>G	0.889717	32.8792	0.0
+Blattella_nipponica	C>A	0.0	9.99506	0.0
+Blattella_nipponica	C>G	0.0	9.99506	0.0
+Blattella_nipponica	G>C	0.0	4.09561	0.0
+Blattella_nipponica	T>A	0.0	32.8792	0.0
+Phyllodromica_iberica	A>G	1.19834	176.196	0.0536904
+Phyllodromica_iberica	C>T	0.546449	44.8619	0.0
+Phyllodromica_iberica	G>A	1.13773	11.0962	0.809431
+Phyllodromica_iberica	G>T	0.796502	5.42047	0.0
+Phyllodromica_iberica	T>A	0.599899	62.6358	0.0
+Phyllodromica_iberica	T>C	3.2156	185.455	0.136879
+Phyllodromica_iberica	A>T	0.0	95.3182	0.0
+Phyllodromica_iberica	T>G	0.0	62.6358	0.0
+Phyllodromica_iberica	C>A	0.0	15.3984	0.0
+Phyllodromica_iberica	G>C	0.0	5.42047	0.0
+Phyllodromica_iberica	C>G	0.0	15.3984	0.0
+Phyllodromica_iberica	A>C	0.0	95.3182	0.0
