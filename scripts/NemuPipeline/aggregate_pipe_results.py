@@ -21,8 +21,8 @@ Final columns in the table:
 - number of nodes in tree (optional)
 '''
 
-PATH_TO_FOLDER = '/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/NemuPipeline/TermAndCock/TermCock271124/'
-PATH_TO_SAVE = '/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/NemuPipeline/TermAndCock/new_term_cock_ms/'
+PATH_TO_FOLDER = '/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/NemuPipeline/TermAndCock/new_nemu_res/output_nonter_nt/'
+PATH_TO_SAVE = '/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/NemuPipeline/TermAndCock/latest_nonter_nt_ms/'
 PATH_TO_TAXONOMY = '/home/gabs/Documents/lab/TermitesAndCockroaches/mtdna-mutspec-insecta/data/MIDORI/all_insects_CO1.tax'
 
 filler_muts12 = ['A>C', 'A>G', 'A>T', 'C>A', 'C>G', 'C>T', 'G>A', 'G>C', 'G>T', 'T>A', 'T>C', 'T>G']
@@ -41,10 +41,10 @@ for dir in os.listdir(PATH_TO_FOLDER):
     if '.' in dir:
         continue
     print(dir)
-    PATH_TO_ms12syn = f'{PATH_TO_FOLDER}{dir}/output/tables/ms12syn.tsv'
-    PATH_TO_ms12syn_inter = f'{PATH_TO_FOLDER}{dir}/output/tables/ms12syn_internal.tsv'
-    PATH_TO_ms192syn =f'{PATH_TO_FOLDER}{dir}/output/tables/ms192syn.tsv'
-    PATH_TO_ms192syn_inter =f'{PATH_TO_FOLDER}{dir}/output/tables/ms192syn_internal.tsv'
+    PATH_TO_ms12syn = f'{PATH_TO_FOLDER}{dir}/tables/ms12syn.tsv'
+    PATH_TO_ms12syn_inter = f'{PATH_TO_FOLDER}{dir}/tables/ms12syn_internal.tsv'
+    PATH_TO_ms192syn =f'{PATH_TO_FOLDER}{dir}/tables/ms192syn.tsv'
+    PATH_TO_ms192syn_inter =f'{PATH_TO_FOLDER}{dir}/tables/ms192syn_internal.tsv'
     
     if os.path.isfile(PATH_TO_ms12syn):
         df12 = pd.read_csv(PATH_TO_ms12syn, sep='\t')
@@ -65,23 +65,27 @@ for dir in os.listdir(PATH_TO_FOLDER):
 
     
     
-    if os.path.isfile(f'{PATH_TO_FOLDER}{dir}/output/final_tree.nwk'):
-        tree = Tree(f'{PATH_TO_FOLDER}{dir}/output/final_tree.nwk', format=1)
+    if os.path.isfile(f'{PATH_TO_FOLDER}{dir}/final_tree.nwk'):
+        tree = Tree(f'{PATH_TO_FOLDER}{dir}/final_tree.nwk', format=1)
         num_of_nodes = len(tree) - 1 # -1 to remove the outgroup
     else:
         num_of_nodes = np.nan
 
-    for entry in SeqIO.parse(f'{PATH_TO_FOLDER}{dir}/query.fasta', 'fasta'):
-        sp = re.findall(r"\[(.*?)\]",entry.description)[0]
+    if os.path.isfile(f'{PATH_TO_FOLDER}{dir}/query.fasta'):
+        for entry in SeqIO.parse(f'{PATH_TO_FOLDER}{dir}/query.fasta', 'fasta'):
+            sp = re.findall(r"\[(.*?)\]",entry.description)[0]
+            sp = sp.split('_')
+            sp = f'{sp[0]}_{sp[1]}'
+    else:
+        sp = dir
     
-    sp = sp.split('_')
-    sp = f'{sp[0]}_{sp[1]}' 
+     
 
     df_meta.append(pd.DataFrame({'Species' : [sp],
-                                 'Class' : tax_df[tax_df[0] == sp][4].to_list(),
-                                 'Order' : tax_df[tax_df[0] == sp][3].to_list(),
-                                 'Family' : tax_df[tax_df[0] == sp][2].to_list(),
-                                 'Genus' : tax_df[tax_df[0] == sp][1].to_list(),
+                                 'Class' : tax_df[tax_df[0] == sp][4].to_list() if (tax_df[0] == sp).any() else np.nan,
+                                 'Order' : tax_df[tax_df[0] == sp][3].to_list() if (tax_df[0] == sp).any() else np.nan,
+                                 'Family' : tax_df[tax_df[0] == sp][2].to_list() if (tax_df[0] == sp).any() else np.nan,
+                                 'Genus' : tax_df[tax_df[0] == sp][1].to_list() if (tax_df[0] == sp).any() else np.nan,
                                  'Nodes_in_tree' : [num_of_nodes]}))
     
     df12['Species'] = sp
