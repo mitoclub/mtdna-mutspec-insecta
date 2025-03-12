@@ -8,6 +8,8 @@
 
 &nbsp; 0.5. aggregate_pipe_results.py - merge mutspec tables from different species into one table
 
+&nbsp; 0.5.5 obsnum_qc.ipynb - merge observed_mutations.tsv tables from different species (no saving) and plot relevant qc data (muts per sp, muts per branch, transitions fraction). For now, it automatically filters out the trees' branches with more than 6 mutations and then updates obsnum and therefore recalculates mutspecs in the merged table from the previous step (change paths accordingly).
+
 1.  midori_parser_codonusage.ipynb - creates mega .gb file of specified taxa from MIDORI sequences
 2.  codonusage_table.py - calculates nucleotide content (general and neutral) and number of codons. automaticaly reverse complements genes on negative strand (<ins>set manually</ins> to ND1, ND4L, ND4 and ND5), can drop species with wrong amino translations, which significantly cuts number of CockTer species for phylo PCA (from 32 to 11)
 3.  calculate_skews.py - calculates skews, can invert codonusage data (including changing skew for GAskew to CTskew). Can only get stats for inverted data
